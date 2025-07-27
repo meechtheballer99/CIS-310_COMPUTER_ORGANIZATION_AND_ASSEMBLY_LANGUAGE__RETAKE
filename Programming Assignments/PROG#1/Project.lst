@@ -1,0 +1,88 @@
+Microsoft (R) Macro Assembler Version 14.28.29333.0	    06/02/21 14:40:23
+Program#1-CIS-310-DemetriusJohnson.asm			     Page 1 - 1
+
+
+				;CIS-350 SUMMER 2021 WITH PROFESSOR DAVID YOON
+				;Name: Demetrius Johnson
+				;Date: 5-30-21 
+				;Program Description: Introduction to MASM; define variables and use registers to complete addition and subtraction operations
+
+
+				.386
+				.model flat,stdcall
+				.stack 4096
+				ExitProcess proto,dwExitCode:dword
+
+ 00000000			.DATA
+
+ 00000000 0000001E		A	DWORD 30d
+ 00000004 00000014		B	DWORD 20d
+ 00000008 0000000A		C1	DWORD 10d
+ 0000000C 00000005		D	DWORD 5d
+ 00000010 00000000		FinalResult DWORD ?	; store the final result of my operation in this location (variable)
+
+ 00000000			.CODE
+ 00000000			main proc 
+
+ 00000000  A1 00000000 R	mov eax, A
+ 00000005  8B 1D 00000004 R	mov ebx, B
+ 0000000B  8B 0D 00000008 R	mov ecx, C1
+ 00000011  8B 15 0000000C R	mov edx, D
+
+				;below, we need to perform the operation: A = (A + B) - (C1 + D)
+
+ 00000017  03 05 00000004 R	add eax, B				; eax = A + B
+ 0000001D  03 0D 0000000C R	add ecx, D				; ecx = C1 + D
+ 00000023  2B C1		sub eax, ecx			; eax = eax - ecx == (A + B) - (C1 + D)
+ 00000025  A3 00000010 R	mov FinalResult, eax	; store final result in a variable
+
+					invoke ExitProcess,0
+ 0000002A  6A 00	   *	    push   +000000000h
+ 0000002C  E8 00000000 E   *	    call   ExitProcess
+ 00000031			main endp
+				end main
+Microsoft (R) Macro Assembler Version 14.28.29333.0	    06/02/21 14:40:23
+Program#1-CIS-310-DemetriusJohnson.asm			     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000014 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000031 DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000031 Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+A  . . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+B  . . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+C1 . . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+D  . . . . . . . . . . . . . . .	DWord	 0000000C _DATA	
+FinalResult  . . . . . . . . . .	DWord	 00000010 _DATA	
+
+	   0 Warnings
+	   0 Errors

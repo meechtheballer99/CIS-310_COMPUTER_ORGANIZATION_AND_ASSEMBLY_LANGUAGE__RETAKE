@@ -1,0 +1,82 @@
+; Program#2 - CIS-310
+;Demetrius Johnson
+;Creation date: June 20, 2021
+;Mod date: June 21, 2021
+;Purpose: Find the mean and variance of an array of numbers
+
+.386
+.model flat,stdcall
+.stack 4096
+ExitProcess proto,dwExitCode:dword
+
+.data														;NOTE: I Make lots of notes to myself in this program so I can refer back to it for my later programs
+	; declare variables here (1 WORD = 2 BYTES)
+
+	AVG		BYTE ?														;use this to store the results of the average												
+	DIFF	SWORD 15 Dup(?)												;use this array to store the use this to store the (element_value - average) (need SWORD for negative values)
+	SQUARE	WORD  15 Dup(?)												;use this array to store the square of the element_value and average difference (variance)
+	RAW		WORD  10, 12, 8, 17, 9, 22, 18, 11, 23, 7, 30, 22, 19, 6, 7	;declare array of raw data to find statistics for
+	arrayLength = ($ - RAW)/2											;use this symbolic constant to store the size of the RAW array 
+																			;(evaluated at runtime; can be changed to store another constant/constant expression 
+																			;but cannot be used as a storage variable --> can only mov integer const/const expressions to it during runtime) 
+																	;also: $ symbol is the current location counter (in bytes), 
+																	;so after declaring RAW array, doing ($ - RAW)/2 does current address - address of Raw to give size of RAW (/2-->in WORDS = 2bytes))
+																	;do: $ - RAW of the RAW array to get the size of the array in BYTES
+																	;Alternatively, I could do : mov ecx, LENGTHOF RAW --> the LENGTHOF directive will return number of elements in RAW
+																	;note: using operator[] with register operands returns the value pointed to by the register if it is storing an address
+																	;otherwise, [] has no effect and simply always returns the value stored by a given variable
+																	;HOWEVER: if you use a variable name + an index register, you will get a byte(s) offset by the value stored in an index register
+																		;from the start address of the variable, and then the data stored at that byte offset is returned (see slide 60 from ch_04)
+																		;for example: [label + reg], or label[reg] ---> label refers to a label/variable name, reg refers to an INDEX register
+																		;(this is called using Indexed Operands; setting index register to a an address is called using Indirect Operands)
+	
+INCLUDE Irvine32.inc		;CPU type and memory model used already included in the irvine32 library, So I techinically don't need the above .directives I made
+.code
+main proc
+	; write your code here
+
+	mov edi, OFFSET RAW		;move address of RAW into edi 32-bit index register using the OFFSET operator (returns an address of a variable/array); note that OFFSET refers to the offset from the start address of the data segment
+	mov ecx, arrayLength	;ECX is a loop counter register used by the LOOP directive --> set it equal to array length
+	mov ax, 0				;zero the accumulator register (AX = Lower 16 bits of the EAX register)
+
+SUM_LABEL:					;use the SUM label in order to create a loop to sum up all the integers in the array
+	add ax, [edi]			;go to the memory location stored by edi, and get the value stored at the memory location, and add it to the ax accumulator register
+	add edi, TYPE RAW		;TYPE directive returns the size of elements in RAW (variable type length), thus add this to the edi index register to move to next position in the RAW array
+	LOOP SUM_LABEL			;call the loop directive, which will first decrement ecx counter register, then if ecx!=0 go to SUM label (set EPI instruction pointer to SUM)
+	
+	mov bl, arrayLength		;need to move arrayLength into bl register location to perform division
+	div bl					;this will do ax/bl = sum/numElements = average --> AL 8-bit reg will store the quotient, AH 8-bit reg will store the remainder (AH-AL should read --> 0B0E)
+	mov AVG, al				;move the average (only the quotient portion; remainder is ignored) into a storage variable
+	
+
+	mov esi, OFFSET DIFF	;move start address of DIFF array into esi 32-bit index register
+	mov edi, OFFSET RAW		;mov start address of RAW back into edi index register
+	mov ecx, arrayLength	;move length of array into ecx counter register for next loop statement
+	
+DIFF_LABEL:
+	mov ax, [edi]			;move the RAW element (original data element) into the ax register
+	sub ax, WORD PTR AVG	;need to cast AVG as WORD in order to do 16-bit subtraction --> perform: (element - avgOfElements) = difference from mean
+	mov [esi], ax			;move the calculated difference into the DIFF array corresponding element location
+	add esi, TYPE DIFF		;go to next element in DIFF array (remember TYPE operator returns the variable type/byte size of a defined variable (and its elements))
+	add edi, TYPE RAW		;go to next element in RAW array (current element address of RAW + 2 bytes since raw array is an array of words; same applies to DIFF array)
+	LOOP DIFF_LABEL			;calculate all differences and store them in the DIFF array
+
+	mov esi, OFFSET DIFF	;move DIFF address into esi index reg for the next loop
+	mov edi, OFFSET SQUARE	;move SQUARE address into edi index reg for the next loop
+	mov ecx, arrayLength	;need to reset ecx to size of the arrays (15) for the next loop statements 
+
+SQUARE_LABEL:
+	mov ax, [esi]			;move the current difference element into ax
+	imul ax, [esi]			;imul using two 16-bit operands multiplies the two operands and store the result in the first operand (in this case, store result in ax, preserving sign +/-)
+	mov [edi], ax			;move the multiplication result into the corresponding SQUARE array element location
+	add esi, TYPE DIFF		;move to next element location/address in DIFF array
+	add edi, TYPE SQUARE	;move to next element location in SQUARE array (remember diff and square arrays contain 2-byte elements, so we use TYPE command to return element size)
+	LOOP SQUARE_LABEL
+	
+	
+	call dumpRegs
+
+
+	invoke ExitProcess, 0
+main endp
+end main
