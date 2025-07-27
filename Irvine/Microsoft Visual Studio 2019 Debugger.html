@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0052)http://www.asmirvine.com/debug/vstudio2019/index.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Microsoft Visual Studio 2019 Debugger</title>
+
+<link rel="stylesheet" href="./Microsoft Visual Studio 2019 Debugger_files/styles.css">
+	<style type="text/css">
+		.style1
+		{
+			width: 85%;
+		}
+		.style2
+		{
+			width: 774px;
+		}
+	     .style3 {
+			width: 104px;
+		}
+	
+		.style3B { width:20%; text-align:center;}
+		
+	     .style4
+		{
+			text-align: center;
+		}
+		
+	    .style5
+        {
+            color: #FF3300;
+            font-size: large;
+        }
+		
+	 </style>
+</head>
+
+<body>
+
+<table width="95%" border="1" cellspacing="0" cellpadding="3">
+  <tbody><tr>
+    <td class="titleBar">Using the Microsoft Visual Studio 2019 Debugger</td>
+  </tr>
+</tbody></table>
+<p>
+</p><table width="95%" border="0" cellspacing="0" cellpadding="0">
+  <tbody><tr> 
+    <td>     
+      <i>Updated 6/28/2019</i> 
+      <p>This tutorial explains how to use the Microsoft Visual Studio 
+        Debugger to debug 32-bit assembly language programs running in protected 
+        mode. Specifically, you will learn how to perform the following tasks:</p>
+      <ul>
+        <li>Step through your program, viewing the source code</li>
+        <li>Set breakpoints in your code</li>
+        <li>View CPU registers and flags</li>
+        <li>View a disassembly of your program</li>
+        <li>Watch the values of program variables</li>
+        <li>View the runtime stack</li>
+        <li>Display blocks of memory </li>
+      </ul>
+	    <p>
+		    For additional information about 
+		    debugging in Visual Studio, visit <a href="http://msdn.microsoft.com/">
+		    http://msdn.microsoft.com</a> and search for <i>Debugging in Visual Studio</i>.</p>
+        <p>
+		    <a href="http://www.asmirvine.com/debug/vstudio2019/index.htm#errors">Select this link</a> if you're having trouble getting the debugger to recognize 
+            debugging information.</p>
+	    <h3>Configure Visual Studio for Debugging</h3>
+	    <p>Visual Studio has a set of different configurations that make it easy to create a 
+		    variety of project types (Visual Basic, ASP.NET, etc.). In order to get the most 
+		    out of debugging assembly language programs, you need to select an appropriate 
+		    configuration. From the Tools menu in Visual Studio, select I<i>mport and Export Settings</i>. 
+				(In Visual Studio Express, select <em>Settings</em> from the Tools menu, then 
+				select <em>Import and Export Settings</em>.)</p>
+			<p>In the following 
+		    dialog, select <i>Reset all settings </i>and click the <i>Next </i>button<i>. </i></p>
+	    <p>
+		    <img alt="Import/Export Settings Wizard" src="./Microsoft Visual Studio 2019 Debugger_files/s1.gif" style="width: 617px; height: 549px"></p>
+	    <p>In the next pane, you have the option of saving your current settings. This would 
+		    be useful if you want to return to your current settings later. Select an option 
+		    and click the <i>Next</i> button.</p>
+	    <p>
+		    <img alt="Save current settings window" src="./Microsoft Visual Studio 2019 Debugger_files/s2.gif" style="width: 617px; height: 549px"></p>
+	    <p>In the following pane (from Visual Studio Professional), select the Visual C++ settings and click the 
+				<em>Finish</em> button.</p>
+	    <p>
+		    <img src="./Microsoft Visual Studio 2019 Debugger_files/s3.gif" style="width: 617px; height: 549px"></p>
+			<p>
+        </p><p>Once your settings have been reset, click the <em>Close</em> button to close the wizard. </p>
+	    <p>Once you begin working with the debugger, you can fine-tune the arrangement of the 
+		    Visual Studio menus and windows, and save your specific settings for later 
+		    recall.</p>
+      <h3>Open a Visual Studio Project file </h3>
+      <p>In this step-by-step tutorial, you will open the sample project and insert 
+        an example program named AddTwo.asm.</p>
+      <ol>
+        <li>Go to the <b>Examples\Project32</b> folder in the disk directory 
+          that contains the book's sample programs. Ordinarily, the full path 
+          will be c:\Irvine\Examples\Project32. </li>
+		 <li>Double-click the file named <b>Project.sln</b>. </li>
+		 <li>In The Solution Explorer window, right-click any existing files with an extension 
+			 of .asm and select <b>Remove</b>. 
+          When prompted by a dialog window, click the <b>Remove</b> button.</li>
+		 <li>Right-click Project in the same window, select <b>Add</b>, and select 
+          <b>Existing Item</b>.</li>
+		 <li>Browse back one level to the Examples folder, then forward to the \ch03 folder,
+		 and select the file named <b>AddTwo.asm</b>. 
+			 It will be added to the Solution Explorer window.</li>
+		 <li>Select <b>Save</b> All from the <b>File</b> menu to save your project 
+          settings.</li>
+		 <li>Double-click the AddTwo.asm filename in Solution Explorer to open 
+          it in the editor:</li>
+      </ol>
+<pre>; AddTwo.asm - adds two 32-bit integers.
+; Chapter 3 example
+
+.386
+.model flat,stdcall
+.stack 4096
+ExitProcess proto,dwExitCode:dword
+
+.code
+main proc
+	mov	eax,5				
+	add	eax,6				
+
+	invoke ExitProcess,0
+main endp
+end main		
+</pre>
+      <p>Build the project by selecting <b>Build Solution</b> from the <b>Build</b> 
+        menu. In the output window, you should see text similar to that shown below. Extra 
+		 lines may be added:</p>
+	    <pre>1&gt;_MASM: 
+1&gt; Assembling [Inputs]... 
+1&gt;Link: 
+1&gt; Project.vcxproj -&gt; C:\Irvine\Examples\Project32\Debug\Project.exe 
+1&gt;Build succeeded. 
+1&gt; 
+1&gt;Time Elapsed 00:00:04.38 
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== 
+</pre>
+	    
+The important thing to notice is the last line, which indicates that the build operation succeeded.	    
+  
+	   
+<h3>Start the Debugger</h3>
+
+	    Press the <b>F10 key</b> to start the debugger. Your environment should appear 
+	    like this:<p><img src="./Microsoft Visual Studio 2019 Debugger_files/S4.gif" height="400"> </p>
+      <p>Don't worry if some of the windows shown here do not appear on your screen. 
+        You can open and close them at will. First however, let's take a tour:</p>
+      <h4>Source Window</h4>
+      <p>The <b>Source</b> window displays the program's source file. Note that 
+        the first <b>MOV</b> statement has a yellow arrow next to it. The arrow 
+        always indicates the next statement that's about to execute.</p>
+      <table width="90%" border="1" cellspacing="0" cellpadding="3" bordercolorlight="#0000FF" bordercolordark="#3333FF">
+        <tbody><tr> 
+          <td><i>Tip:</i> You can remove any debugger window by right-clicking 
+            on its Tab and selecting <b>Hide</b>. You can open any debugging window 
+            by selecting <b>Windows</b> from the <b>Debug</b> menu. You can make a window 
+			collapse when it is not used by clicking the Auto Hide icon in its title bar. 
+			The icon looks like a push pin. If the pin points sideways, the window will 
+			collapse automatically.</td>
+        </tr>
+      </tbody></table>
+<h3>Adjust the Debugging Support Windows</h3>
+	    This is a good time to remove panels that you will not use. In the lower part of 
+	    the debugger window, select an remove all but the Watch and Output panels. On 
+	    the side panel, remove all but the Solution Explorer window. Also, from the 
+	    Debug menu, select Windows, and select Registers. 
+	    <p>
+	    You may want to remove some of the extra toolbars from the top of the window. If 
+	    so, select Toolbars from the View menu, and un-check any toolbars you want to 
+	    remove. You can also remove individual buttons from a toolbar: Select the 
+	    dropdown arrow on the right side of the toolbar, and select <i>Add or Remove 
+	    Buttons</i>.<br>
+	    
+    </p><h4>Moving and Undocking Windows</h4>
+	    You can move any window by dragging its titlebar with the mouse. You can 
+	    dock it (position it) by dropping it on any side of your workspace. For example, 
+	    I like to put the Registers and Watch windows on the right side of the work 
+	    area. If, however, you have more than one window positioned directly on top of each 
+	    other, dragging the title bar will move all windows at once. If you want to 
+	    select only one window from a cluster of windows, drag its tab (on the bottom) 
+	    to the new location. The other windows in the cluster will not be affected.
+	    <p>
+	    You can undock a window by dragging it with the mouse to any location on your 
+	    desktop. It can be completely outside the Visual Studio window.
+
+</p><h4>Watch Window</h4>
+	   For this part of the tutorial, you will need two download the AddSub2.asm program
+		by <a href="http://www.asmirvine.com/debug/vstudio2019/AddSub2.asm">right-clicking this link</a>. After downloading the file, 
+		please add it to your Solution Explorer window, and remove the AddTwo.asm program.
+		Here is a partial program listing:
+<pre>		
+INCLUDE Irvine32.inc
+.data
+val1     dword  10000h
+val2     dword  40000h
+val3     dword  20000h
+finalVal dword  ?
+.code
+main PROC
+	mov	eax,val1		; start with 10000h
+	add	eax,val2		; add 40000h
+	sub	eax,val3		; subtract 20000h
+	mov	finalVal,eax		; store the result (30000h)
+	call	DumpRegs		; display the registers
+	exit
+main ENDP
+END main			
+</pre>		
+      If at some later time the watch window disappears, you can get it back again. 
+		 While currently debugging a program, select <i>Windows</i> from the Debug menu, and select 
+		 <i>Watch 1.</i> 
+        A Watch window is like an electronic spreadsheet that displays the names 
+        and values of selected variables. As you step through a program, you can 
+        see variables in this window change value. Currently the window is empty, 
+        but you can drag any program variable into the window with your mouse. 
+      <p></p>
+      <p>Next, you will display the value of some variables in the Watch window. Drag the <b>val1</b>, <b>val2</b>, 
+		 <b>val3,</b> and <b>finalVal</b> 
+           variables into the Watch window and note their current values: </p>
+      <p>
+		 <img alt="" src="./Microsoft Visual Studio 2019 Debugger_files/s7.gif" height="176"></p>
+      <p>The values are currently displayed in decimal, so select hexadecimal format by right-clicking on the watch window and selecting <b>Hexadecimal Display</b> from the 
+        popup menu. Following is a sample:</p>
+	    <p>
+		 <img alt="" src="./Microsoft Visual Studio 2019 Debugger_files/s8.gif" height="176"></p>
+      <h4>Memory Window</h4>
+      <p>From the Debug menu, welect <i>Windows, s</i>elect <i>Memory, </i>and select<i> 
+          Memory 1</i>. 
+        The Memory1 window displays a raw dump of memory in either hexadecimal 
+        or decimal. It is particularly useful when working with array variables. 
+        Since we don't have any arrays in the program, let's display the value 
+        of <b>val3</b>. Next to the Address label, type: <b>&amp;val3</b></p>
+      <p>The &amp; before the variable name means to interpret the variable name 
+        as an address. In assembly language, all labels are implied addresses. 
+        Variable names are case-sensitive in the debugger. The Memory window displays a series of individual memory bytes, beginning 
+        at the address of <b>val3</b>. Right-click on the window, and select <i>4-byte 
+        Integer</i> as the display format. Along the left side of the window is shown the address of 
+        the first value in each line:</p>
+      <p><img src="./Microsoft Visual Studio 2019 Debugger_files/S9.gif" width="511" height="111"></p>
+      <p>In our sample, <b>val3</b> is located at address 00405008, although your 
+        addresses might be different. You can also type a hexadecmal constant 
+        into the Address field. Use the C-language format, where the digits are 
+        preceded by "0x". For example: 0x0040400C.</p>
+        <p>Note: The memory Windows are only available if address-level debugging is enabled 
+            in the Tools / Options / Debugging settings, available by clicking on the Tools 
+            menu in Visual Studio, and then selecting Options. </p>
+
+		<h4>Register Window</h4>
+      <p>You can display the Register window by selecting <i>Windows</i> from the Debug menu, and selecting
+		 <i>Register</i>. 
+        The Register window displays the contents of the CPU registers. The flag 
+        values do not show by default, but you can add them in by right-clicking 
+        and selecting <i>Flags:</i></p>
+      <table width="51%" border="0" cellspacing="1" cellpadding="0" height="342">
+        <tbody><tr> 
+          <td width="37%"><img src="./Microsoft Visual Studio 2019 Debugger_files/S10.gif" width="200"></td>
+			 <td width="5%"></td>
+          <td width="33%"> 
+            <p><b>Key to flag abbreviations</b></p>
+            <table border="0" cellspacing="0" cellpadding="3" style="width: 94%">
+              <tbody><tr> 
+                <td class="style3"><b><font color="#FF3333">Flag Name</font></b></td>
+                <td class="style3B"><b><font color="#FF3333">Abbreviation</font></b></td>
+              </tr>
+              <tr> 
+                <td class="style3">Overflow</td>
+                <td style="text-align: center">OV</td>
+              </tr>
+              <tr> 
+                <td class="style3">Direction</td>
+                <td class="style4">UP</td>
+              </tr>
+              <tr> 
+                <td class="style3">Interrupt</td>
+                <td class="style4">EI</td>
+              </tr>
+              <tr> 
+                <td class="style3">Sign</td>
+                <td class="style4">PL</td>
+              </tr>
+              <tr> 
+                <td class="style3">Zero</td>
+                <td class="style4">ZR</td>
+              </tr>
+              <tr> 
+                <td class="style3">Aux Carry</td>
+                <td class="style4">AC</td>
+              </tr>
+              <tr> 
+                <td class="style3">Parity</td>
+                <td class="style4">PE</td>
+              </tr>
+              <tr> 
+                <td class="style3">Carry</td>
+                <td class="style4">CY</td>
+              </tr>
+            </tbody></table>
+            <p>&nbsp;</p>
+          </td>
+        </tr>
+      </tbody></table>
+      <h4> Disassembly Window</h4>
+      <p>Select <i>Windows</i> from the Debug menu, and select <i>Disassembly</i>. The 
+		 Disassembly window displays a raw listing of the program's code. In some 
+		 programs, it will show code generated by macros or by high-level MASM directives 
+		 (such as .IF, in Chapter 6). </p>
+      <p><img src="./Microsoft Visual Studio 2019 Debugger_files/S11.gif" height="528"></p>
+      <p>If you right-click inside the Disassembly window, the popup context menu offers different viewing 
+		 options:</p>
+        <p>
+            <img alt="" src="./Microsoft Visual Studio 2019 Debugger_files/s18.gif"></p>
+	    <p>Here is a sample in which <i>Show Source Code </i>is disabled, and both <i>Show 
+		    address </i>and <i>Show 
+        	 symbol names</i> options are enabled:</p>
+      <pre>--- AddSub2.asm ----------------------------------------------------------------<br>main:<br>00401010  mov         eax,dword ptr [val1 (405000h)] <br>00401015  add         eax,dword ptr [val2 (405004h)] <br>0040101B  sub         eax,dword ptr [val3 (405008h)] <br>00401021  mov         dword ptr [finalVal (40500Ch)],eax <br>00401026  call        DumpRegs (4011F5h) <br>0040102B  push        0    <br>0040102D  call        ExitProcess (401D30h) 
+		</pre>
+		
+      <p>The offset of each variable apears next to its name. The <b>exit</b> 
+        statement in the source code listing has been translated into a call to 
+        the MS-Windows <b>ExitProcess</b> function, which terminates the current program.</p>
+      <h3>Steping Through the Program's Execution</h3>
+      <p>Next, you will begin stepping through the program's execution, one line at a time. 
+		 Press the F10 several times and watch the yellow arrow in the Source window move from statement 
+        to statement. Notice the following as you step through the program:</p>
+      <ul>
+        <li>Individual register names (in the <i>Register</i> window) turn red, 
+          indicating that they have been modified. The AddSub2 program modifies 
+          the EAX and EIP registers quite a bit, as you can see.</li>
+        <li>Variables in the Watch window turn red when they are modified.</li>
+        <li>Memory locations in the Memory window turn red when they are modified.</li>
+      </ul>
+      <p>As soon as you step past the <b>call DumpRegs</b> statement, click on the black 
+		 MS-DOS icon on the Taskbar at the bottom of the screen. You should see the 
+		 program's output, which is a register display:</p>
+	    <p>
+		    <img src="./Microsoft Visual Studio 2019 Debugger_files/s13.gif" style="width: 597px; height: 153px"></p>
+      <p>When you reach the <b>exit</b> statement and press F10, the debugger halts and you 
+		 return to editing mode. </p>
+      <h4>Step Into Command (F11)</h4>
+      <p>Another way to step through a program is to use the <b>Step Into</b> (F11) 
+        command. It steps down into procedure calls. In contrast, the F10 key 
+        just executes procedure calls without tracing into the procedure code.</p>
+<h3>Stopping and Restarting</h3>
+      <p>It's easy to either stop or restart your program inside the debugger 
+        while you're in the process of stepping through a program:</p>
+      <ul>
+        <li>To restart the program, select <i>Restart</i> from the Debug menu. 
+          The program is reloaded into memory, so any changes previously made 
+          to variables in the Watch window are undone. Also, you have to retype 
+          the name of your variable in the Memory window, because it resets itself 
+          to a default address.</li>
+        <li>To stop debugging in the middle of a program, select <i>Stop Debugging</i> 
+          from the Debug menu. You can also use the icon containing a small square on the 
+		   Debug toolbar.</li>
+      </ul>
+<h4>Toggle Breakpoint (F9)</h4>
+		    You can set a breakpoint on any executable line in your source program by either 
+	    clicking the mouse in the left margin, or pressing the F9 key. This can 
+		    be done before you start the debugger, or while you are stepping through the 
+		    program. If you press F9 when the cursor is on a line containing a 
+	    breakpoint, the breakpoint is removed. The following image shows code containing 
+	    a breakpoint:<br>
+	    <br>
+	    <img border="1" src="./Microsoft Visual Studio 2019 Debugger_files/s15.gif" style="width: 437px; height: 193px"><br>
+	    <br>
+	    	    When you set a breakpoint, you can run your program at full speed up to 
+		    the line containing the first breakpoint. The debugger will pause on the line, 
+		    and wait for you to either step through the code from that point, or run the 
+		    program to the next breakpoint.<ul>
+		    <li>Use the F5 key (Menu: Debug / Run) to start a program and run to the first 
+		    breakpoint.</li>
+		    <li>When at a breakpoint, use the F5 key (Menu: Debug/Continue) to continue 
+		    execution to the next breakpoint.</li>
+	    </ul>
+         <table border="1" cellpadding="3" cellspacing="0" class="style1">
+		    <tbody><tr>
+			    <td class="style2">
+				    <i><b>Tip:</b></i> Be sure to stop the debugger before trying to modify and re-assemble 
+        your program's source code. Otherwise, the linker will refuse to assemble 
+        your EXE file, indicating that it's currently in use</td>
+		    </tr>
+	    </tbody></table>
+<h3>Viewing the Runtime Stack</h3>
+	    <p>The runtime stack will become more important as you beginn to write programs that 
+		    contain procedures other than main. Each time you call a procedure, you place 
+		    the program's return address on the stack. (This is explained in Chapter 5.) To 
+		    view the runtime stack while debugging, display a memory window at the 
+		    address specified in the ESP register. In the following image, the stack shows a 
+		    return address (00401025) stored at the memory location point to by the ESP 
+		    (stack pointer) register:</p>
+	    <p>
+		    <img src="./Microsoft Visual Studio 2019 Debugger_files/s16.gif" style="width: 335px; height: 182px"></p>
+	    <p>When you display the stack, right-click the memory window and select <i>4-byte Integer</i> as the display format.</p>
+		 
+<h3>Saving Your Visual Studio Setup</h3>
+	    <p>After configuring Visual Studio to your debugging and editing preferences, you 
+		    would be wise to save your setup. Here are the steps:</p>
+			<ol>
+			<li>From the Tools menu, select <i>Import and Export Settings</i>.</li>
+			<li>In the next wizard step, select <i>Export selected environment settings</i>.</li>
+			<li>In the next step, you select which settings to save. Leave the default 
+		    selections unchanged.</li>
+			<li>In the last panel, select a name that you're likely to remember for the 
+		    settings file and click the <i>Finish</i> 
+		    button. Here is a sample of this step (change 2012 to 2013 in your copy):</li>		
+			</ol>
+	    <p>
+		    <img src="./Microsoft Visual Studio 2019 Debugger_files/s14.gif" style="width: 612px; height: 258px"></p>
+	    <p>If you ever want to return Visual Studio to the settings you've saved, just run 
+		    the Import and Export Settings Wizard again.</p>
+    </td>
+  </tr>
+</tbody></table>
+
+<hr>
+<h3>Error Messages</h3>
+<a name="errors"></a>
+    <p><strong>Debugging information for "project.exe" cannot be found or does not 
+        match. Binary was not built with debugging information.</strong></p>
+    <p>This error occurs when the Visual Studio project is not configured 
+        correctly for debugging. This might happen if you are working with a Visual Studio project 
+        file that has been altered or reconfigured accidentally. Here's how to fix it:</p>
+    <ol>
+        <li>From the Project menu, select (projectname) Properties</li>
+        <li>In the left panel, expand "Configuration Properties" entry</li>
+        <li>Expand the C/C++ entry</li>
+        <li>Select "General" </li>
+        <li>In the right panel, change "Debug Information Format" to "Program Database For 
+            Edit And Continue (/ZI)" </li>
+        <li>In the left panel, Select "Optimization" </li>
+        <li>In the right panel, change "Optimization" to "Disabled (/Od)" </li>
+        <li>In the left panel, expand "Linker"</li>
+        <li>In the left panel, select "Debugging" </li>
+        <li>In the right panel, change "Generate Debug Info" to "Yes" </li>
+        <li>Click OK button to save your changes.</li>
+        <li>&nbsp;Rebuild your application and begin debugging.</li>
+    </ol>
+    <hr>
+    <p>&nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+
+
+</body></html>
