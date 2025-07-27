@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)https://www.osdata.com/topic/language/asm/datamove.htm -->
+<html lang="en" dir="ltr"><!--FILE NAME topic/language/asm/datamove.htm--><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Data Movement Instructions in Assembly Language</title>
+
+<meta name="revisit-after" content="15 days">
+<meta name="robots" content="all">
+<meta name="description" content="Data movement instructions in assembly language programming">
+<meta name="keywords" content="software development, Assembly language programming, ASM, assmebler, assemblers, machine code">
+<meta name="creation" content="2001-02-21">
+<meta name="last-modified" content="2001-02-26">
+<meta name="MSSmartTagsPreventParsing" content="TRUE">
+<link rel="stylesheet" type="text/css" href="./Data Movement Instructions in Assembly Language_files/style.css">
+<script charset="utf-8" src="./Data Movement Instructions in Assembly Language_files/moment_timeline.bcb1cafa923482f4826e32741fe16a98.js.download"></script><script charset="utf-8" src="./Data Movement Instructions in Assembly Language_files/timeline.28ecda9667eeb8e1b18898b99fee6c31.js.download"></script></head>
+
+<body bgcolor="#ffffff" text="#000000" leftmargin="20" topmargin="10" marginwidth="20" marginheight="10">
+
+<table align="right"><tbody><tr><td align="center"><a href="http://www.thissideofsanity.com/tshirt/osdata.html" onmouseover="window.status=&#39;music by ThisSideofSanity.com&#39;;return true" style="background:transparent"><img src="./Data Movement Instructions in Assembly Language_files/tsosdragon.jpg" width="82" height="128" border="2"></a><br><small>music</small></td></tr></tbody></table>
+
+<table border="0">
+<tbody><tr><td><a href="https://www.osdata.com/index.htm" onmouseover="window.status=&#39;Operating Systems home page&#39;;return true" style="background:transparent"><img src="./Data Movement Instructions in Assembly Language_files/oslogo.jpg" width="72" height="72" border="0" alt="OSdata.com: assembly language" name="Image1"></a></td><td width="10">&nbsp;</td><td align="center" valign="middle"><h1 align="center"><font color="#cc44cc">OSdata.com</font></h1></td></tr>
+</tbody></table>
+
+<h1 align="center">Assembly Language</h1>
+<h2 align="center">data movement</h2>
+
+<h2 align="center">summary</h2>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;This web page examines data movement instructions in assembly language. Specific examples of instructions from various processors are used to illustrate the general nature of assembly language.</p>
+
+<table border="2" align="center">
+<tbody><tr><td align="center" bgcolor="#66ffff"><h2 align="center">free computer programming text book project</h2>
+<p align="center">If you like the idea of this project,<br>then please donate some money.
+<br><br><a href="https://www.osdata.com/pledge.html">more information on donating</a></p></td></tr>
+</tbody></table>
+
+<!-- Search Google -->
+<center>
+<table bgcolor="#ffffff" border="2">
+<tbody><tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<form method="GET" action="http://www.google.com/custom">
+<a href="http://www.google.com/">
+<img src="./Data Movement Instructions in Assembly Language_files/Logo_25wht.gif" border="0" alt="Google" align="center"></a>
+<br>
+<input type="text" name="q" size="31" maxlength="255" value="">
+<br>
+<input type="submit" name="sa" value="Search">
+<input type="hidden" name="client" value="pub-4677813635044438">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="0911992725">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1;">
+<input type="hidden" name="hl" value="en">
+</form>
+</td>
+<td>
+<script id="twitter-wjs" src="./Data Movement Instructions in Assembly Language_files/widgets.js.download"></script><script type="text/javascript"><!--
+google_ad_client = "ca-pub-1242330569396958";
+/* TSOS */
+google_ad_slot = "9456247029";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="./Data Movement Instructions in Assembly Language_files/f.txt">
+</script>
+</td></tr></tbody></table>
+</center>
+<!-- Search Google -->
+
+<p align="center">Now building a <a href="https://www.osdata.com/topic/milo/milo.html%3Efree%20emulator%20and%20assembly%20language%20proigramming%20lessons%3C/a%3E.%3C/p%3E%3Cp%20align=" center"=""><small>For those with high speed connections, the very large single file </small></a><small><a href="https://www.osdata.com/topic/language/asm.htm">summary</a> is still on line.</small></p>
+
+<ul type="disc">
+   <li><a href="https://www.osdata.com/topic/language/asm/asmintro.htm">table of contents for assembly language section</a></li>
+   <li><a href="https://www.osdata.com/topic/language/asm/datamove.htm#datamovement">data movement</a></li>
+   <li><a href="https://www.osdata.com/topic/language/asm/datamove.htm#addressmovement">address movement</a></li>
+   <li><a href="https://www.osdata.com/topic/language/asm/asmintro.htm#books">further reading:</a> books on assembly language</li>
+   <li><a href="https://www.osdata.com/topic/language/asm/asmintro.htm#relatedsoftware">related software</a></li>
+   <li><a href="https://www.osdata.com/topic/language/asm/asmintro.htm#websites">further reading:</a> websites</li>
+</ul>
+
+<a name="datamovement"></a>
+<h3 align="center">data movement</h3>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Data movement instructions move data from one location to another. The source and destination locations are determined by the addressing modes, and can be registers or memory. Some processors have different instructions for loading registers and storing to memory, while other processors have a single instruction with flexible addressing modes. Data movement instructions generally have the greatest options for addressing modes. Data movement instructions typically come in a variety of sizes. Data movement instructions destroy the previous contents of the destination. Data movement instructions typically set and clear processor flags. When the destination is a register and the data is smaller than the full register size, the data might be placed only in the low order bits (leaving high order bits unchanged), or might be zero- or sign-extended to fill the entire register (some processors only use one choice, others permit the programmer to choose how this is handled). Register to register operations can usually have the same source and destination register.</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Earlier processors had different instructions and different names for different kinds of data movement, while most modern processors group data movement into a single symbolic name, with different kinds of data movement being indicated by address mode and size designation. A <b>load</b> instruction loads a register from memory. A <b>store</b> instruction stores the contents of a register into memory. A <b>transfer</b> instruction loads a register from another register. In processors that have separate names for different kinds of data moves, a memory to memory data move might be specially designated as a “move” instruction.</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;An <b>exchange</b> instruction exchanges the contents of two registers, two memory locations, or a register and a memory location (although some processors only have register-register exchanges or other limitations).</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Some processors include versions of data movement instructions that can perform simple operations during the data move (such as compliment, negate, or absolute value).</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Some processors include instructions that can <b>save</b> (to memory) or <b>restore</b> (from memory) a block of registers at one time (useful for implementing subroutines).</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Some processors include instructions that can move a block of memory from one location to another at one time. If a processor includes string instructions, then there will usually be a string instruction that moves a string from one location in memory to another.</p>
+
+<ul>
+   <li><b>MOVE</b> Move Data; Motorola 680x0, Motorola 68300; move a byte (MOVE.B 8 bits), word (MOVE.W 16 bits), or longword (MOVE.L 32 bits) of data; memory to memory, memory to register, register to memory, or register to register; moves of byte and word data to registers leaves high order bits unchanged; sets or clears flags</li>
+   <li><b>MOV</b> Move Data; Intel 80x86; move a byte (8 bits), word (16 bits), or doubleword (32 bits) of data; memory to register, register to memory, or register to register (cannot move data from memory to memory or from segment register to segment register); does not affect flags</li>
+   <li><b>MOV</b> Move Data; DEC VAX; move a byte (MOVB 8 bits), word (MOVW 16 bits), longword (MOVL 32 bits), quadword (MOVQ 64 bits), octaword (MOVQ 128 bits), single precision floating (MOVF 32 bits), double precision floating (MOVD 64 bits), G floating (MOVG 64 bits), or H floating (MOVH 128 bits) of data; memory to memory, memory to register, register to memory, or register to register; moves of byte and word data to registers leaves high order bits unchanged; quadword, D float, and G float moves to or from registers are consecutive register pairs, octaword, and H float moves to or from registers are four consecutive registers; and sets or clears flags</li>
+   <li><b>PUSH</b> Push; Intel 80x86; decrement stack pointer and move a word (16 bits) or doubleword (32 bits) of data from memory or register (or byte of immediate data) onto stack; does not affect flags</li>
+   <li><b>PUSHL</b> Push Long; DEC VAX; decrement stack pointer (R14) and move a longword (32 bits) of data from memory or register onto stack; equivalent to MOVL src, -(SP), but shorter and executes faster; sets or clears flags</li>
+   <li><b>POP</b> Pop; Intel 80x86; move a word (16 bits) or doubleword (32 bits) of data from top of stack to register or memory and increment stack pointer; does not affect flags</li>
+   <li><b>LR</b> Load from Register; IBM 360/370; RR format; move a full word (32 bits) of data; register to register only; does not affect condition code</li>
+   <li><b>L</b> Load (from main storage); IBM 360/370; RX format; move a full word (32 bits) of data; main storage to register only; does not affect condition code</li>
+   <li><b>LH</b> Load Half-word; IBM 360/370; RX format; move a half-word (16 bits) of data; main storage to register only; does not affect condition code</li>
+   <li><b>LDA</b> Load A-register; MIX; move word or partial word field of data; main storage to accumulator only</li>
+   <li><b>LDX</b> Load X-register; MIX; move word or partial word field of data; main storage to extension register only</li>
+   <li><b>LD<i>i</i></b> Load index-register; MIX; move word or partial word field of data; main storage to one of five index registers only</li>
+   <li><b>ST</b> Store (into main storage); IBM 360/370; RX format; move a full word (32 bits) of data; register to main storage only; does not affect condition code</li>
+   <li><b>STH</b> Store Half-word; IBM 360/370; RX format; move a half-word (16 bits) of data; register to main storage only; does not affect condition code</li>
+   <li><b>STA</b> Store A-register; MIX; move word or partial word field of data; accumulator to main storage only</li>
+   <li><b>STX</b> Store X-register; MIX; move word or partial word field of data; extension register to main storage only</li>
+   <li><b>ST<i>i</i></b> Store index-register; MIX; move word or partial word field of data; one of five index registers to main storage only</li>
+   <li><b>MVI</b> MoVe Immediate; IBM 360/370; SI format; move a character (8 bits) of data; immediate data to register only; does not affect condition code</li>
+   <li><b>MOVEQ</b> Move Quick; Motorola 680x0, Motorola 68300; moves byte (8 bits) of sign-extended data (32 bits) to a data register; sets or clears flags</li>
+   <li><b>CLR</b> Clear; Motorola 680x0, Motorola 68300; clears a register or contents of a memory location (.B 8, .W 16, or .L 32 bits) to zero; clears flags for memory and data registers, does not modify flags for address register</li>
+   <li><b>CLR</b> Clear; DEC VAX; clears a scalar quantity in register or memory to zero (CLRB 8 bits, CLRW 16 bits, CLRL 32 bits, CLRQ 64 bits, CLRO 128 bits, CLRF 32 bit float, or CLRD 64 bit float), an integer CLR will clear the same size floating point quantity because VAX floating point zero is represented as all zero bits; quadword and D float clears of registers are consecutive register pairs, octaword clears to registers are four consecutive registers; equivalent to MOVx #0, dst, but shorter and executes faster; sets or clears flags</li>
+   <li><b>STZ</b> Store Zero; MIX; move word or partial word field of data, store zero into designated word or field of word of memory</li>
+   <li><b>EXG</b> Exchange; Motorola 680x0, Motorola 68300; exchanges the data (32 bits) in two data registers; does not affect flags</li>
+   <li><b>XCHG</b> Exchange; Intel 80x86; exchanges the data (16 bits or 32 bits) in a register with the AX or EAX register or exchanges the data (8 bits, 16 bits, or 32 bits) in a register with the contents of an effective address (register or memory); LOCK prefix and LOCK# signal asserted in XCGHs involving memory; does not affect flags</li>
+   <li><b>MOVSX</b> Move with Sign Extension; Intel 80x86; moves data from a register or memory to a register, with a sign extension (conversion to larger binary integer: byte to word, byte to doubleword, or word to doubleword); does not affect flags</li>
+   <li><b>MOVZX</b> Move with Zero Extension; Intel 80x86; moves data from a register or memory to a register, with a zero extension (conversion to larger binary integer: byte to word, byte to doubleword, or word to doubleword); does not affect flags</li>
+   <li><b>MOVZ</b> Move Zero Extended; DEC VAX; moves an unsigned integer to a larger unsigned integer with zero extend, source and destination in register or memory (MOVZBW Byte to Word, MOVZBL Byte to Long, MOVZWL Word to Long); sets or clears flags</li>
+   <li><b>MCOM</b> Move Complemented; DEC VAX; moves the logical complement (one’s complement) of an integer to register or memory (MCOMB 8 bits, MCOMW 16 bits, or MCOML 32 bits); sets or clears flags</li>
+   <li><b>LCR</b> Load Complement from Register; IBM 360/370; RR format; fetches a full word (32 bits) of data from one of 16 general purpose registers, complements the data, and stores a full word (32 bits) of data in one of 16 general purpose registers; register to register only; sets or clears flags</li>
+   <li><b>LPR</b> Load Positive from Register (absolute value); IBM 360/370; RR format; fetches a full word (32 bits) of data from one of 16 general purpose registers, creates the absolute value (positive) the data, and stores a full word (32 bits) of data in one of 16 general purpose registers; register to register only; sets or clears flags</li>
+   <li><b>MNEG</b> Move Negated; DEC VAX; moves the arithmetic negative of a scalar quantity to register or memory (MNEGB 8 bits, MNEGW 16 bits, MNEGL 32 bits, MNEGQ 64 bits, MNEGF 32 bit float, or MNEGD 64 bit float); if source is positive zero, result is also positive zero; sets or clears flags</li>
+   <li><b>LNR</b> Load Negative from Register (negative of absolute value); IBM 360/370; RR format; fetches a full word (32 bits) of data from one of 16 general purpose registers, creates the absolute value the data, complements (negative) the absolute value of the data, and stores a full word (32 bits) of data in one of 16 general purpose registers; register to register only; sets or clears flags</li>
+   <li><b>LDAN</b> Load A-register Negative; MIX; move word or partial word field of data, load sign field with opposite sign; main storage to accumulator only</li>
+   <li><b>LDXN</b> Load X-register Negative; MIX; move word or partial word field of data, load sign field with opposite sign; main storage to extension register only</li>
+   <li><b>LD<i>i</i>N</b> Load index-register Negative; MIX; move word or partial word field of data, load sign field with opposite sign; main storage to one of five index registers only</li>
+   <li><b>STZ</b> Store Zero; MIX; move word or partial word field of data, store zero into designated word or field of word of memory</li>
+   <li><b>MVC</b> MoVe Character; IBM 360/370; SS format; moves one to 256 characters (8 bits each) of data; main storage to main storage only; does not affect condition code</li>
+   <li><b>MOVE</b> Move (block); MIX; move the number of words specified by the F field from location M to the location specified by the contents of index register 1, incrementing the index register on each word moved</li>
+   <li><b>MOVEM</b> Move Multiple; Motorola 680x0, Motorola 68300; move contents of a list of registers to memory or restore from memory to a list of registers; does not affect condition code</li>
+   <li><b>LM</b> Load Multiple; IBM 360/370; RS format; moves a series of full words (32 bits) of data from memory to a series of general purpose registers; main storage to register only; does not affect condition code</li>
+   <li><b>STM</b> STore Multiple; IBM 360/370; RS format; moves contents of a series of general purpose registers to a series of full words (32 bits) in memory; register to main storage only; does not affect condition code</li>
+   <li><b>PUSHA</b> Push All Registers; Intel 80x86; move contents all 16-bit general purpose registers to memory pointed to by stack pointer (in the order AX, CX, DX, BX, original SP, BP, SI, and DI ); does not affect flags</li>
+   <li><b>PUSHAD</b> Push All Registers; Intel 80386; move contents all 32-bit general purpose registers to memory pointed to by stack pointer (in the order EAX, ECX, EDX, EBX, original ESP, EBP, ESI, and EDI ); does not affect flags</li>
+   <li><b>POPA</b> Pop All Registers; Intel 80x86; move memory pointed to by stack pointer to all 16-bit general purpose registers (except for SP); does not affect flags</li>
+   <li><b>POPAD</b> Pop All Registers; Intel 80386; move memory pointed to by stack pointer to all 32-bit general purpose registers (except for ESP); does not affect flags</li>
+   <li><b>STJ</b> Store jump-register; MIX; move word or partial word field of data; jump register to main storage only</li>
+   <li><b>MOVEP</b> Move Peripheral Data; Motorola 680x0, Motorola 68300; moves data (16 bits or 32 bits) from a data register to memory mapped peripherals or moves data from memory mapped peripherals to a data register, skipping every other byte</li>
+</ul>
+
+<a name="addressmovement"></a>
+<h3 align="center">address movement</h3>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Address movement instructions move addresses from one location to another. The source and destination locations are determined by the addressing modes, and can be registers or memory. Address movement instructions can come in a variety of sizes. Address movement instructions destroy the previous contents of the destination. Address movement instructions typically do not modify processor flags. When the destination is a register and the address is smaller than the full register size, the data might be placed only in the low order bits (leaving high order bits unchanged), or might be zero- or sign-extended to fill the entire register (some processors only use one choice, others permit the programmer to choose how this is handled).</p>
+
+<ul>
+   <li><b>MOVEA.W</b> Move Address (Word); Motorola 680x0, Motorola 68300; move an address word (16 bits) as sign-extended data (32 bits); memory to address register or register to address register; does not modify flags</li>
+   <li><b>MOVEA.L</b> Move Address (Longword); Motorola 680x0, Motorola 68300; move an address longword (32 bits); memory to address register or register to address register; does not modify flags</li>
+   <li><b>LEA</b> Load Effective Address; Motorola 680x0, Motorola 68300; computes an effective address and loads the result into an address register</li>
+   <li><b>LA</b> Load Address; RX format; IBM 360/370; computes an effective address and loads the 24-bit result (zero extended to 32-bits) into a general purpose register; does not affect condition code</li>
+   <li><b>ENTA</b> Enter A-register; MIX; move word or partial word field contents of index register to A-register (accumulator)</li>
+   <li><b>ENTX</b> Enter X-register; MIX; move word or partial word field contents of index register to X-register (extension)</li>
+   <li><b>ENT<i>i</i></b> Enter I-register; MIX; move word or partial word field contents of index register to designated index register</li>
+   <li><b>ENNA</b> Enter Negative A-register; MIX; move word or partial word field contents of index register to A-register (accumulator), opposite sign loaded</li>
+   <li><b>ENNX</b> Enter Negative X-register; MIX; move word or partial word field contents of index register to X-register (extension), opposite sign loaded</li>
+   <li><b>ENN<i>i</i></b> Enter Negative I-register; MIX; move word or partial word field contents of index register to designated index register, opposite sign loaded</li>
+   <li><b>INCA</b> Increase A-register; MIX; add word or partial word field contents of memory to A-register (accumulator), overflow toggle possibly set</li>
+   <li><b>INCX</b> Increase X-register; MIX; add word or partial word field contents of memory to X-register (extension), overflow toggle possibly set</li>
+   <li><b>INC<i>i</i></b> Increase I-register; MIX; add word or partial word field contents of memory to designated index register, overflow toggle possibly set</li>
+   <li><b>DECA</b> Decrease A-register; MIX; subtract word or partial word field contents of memory from A-register (accumulator), overflow toggle possibly set</li>
+   <li><b>DECX</b> Decrease X-register; MIX; subtract word or partial word field contents of memory from X-register (extension), overflow toggle possibly set</li>
+   <li><b>DEC<i>i</i></b> Decrease I-register; MIX; subtract word or partial word field contents of memory from designated index register, overflow toggle possibly set</li>
+   <li><b>PEA</b> Push Effective Address; Motorola 680x0, Motorola 68300; computes an effective address and pushes the result onto a stack (predecrementing an address register acting as a stack pointer)</li>
+   <li><b>LINK</b> Link Stack; Motorola 680x0, Motorola 68300</li>
+   <li><b>UNLK</b> Unlink Stack; Motorola 680x0, Motorola 68300</li>
+</ul>
+
+<p align="center">Now building a <a href="https://www.osdata.com/topic/milo/milo.html%3Efree%20emulator%20and%20assembly%20language%20proigramming%20lessons%3C/a%3E.%3C/p%3E%3Cp%20align=" center"=""><small>For those with high speed connections, the very large single file </small></a><small><a href="https://www.osdata.com/topic/language/asm.htm">summary</a> is still on line.</small></p>
+
+<h1 align="center">free music player coding example</h1>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>Programming example:</b> I am making heavily documented and explained open source PHP/MySQL code for a method to play music for free — almost any song, no subscription fees, no download costs, no advertisements, all completely legal. This is done by building a front-end to YouTube (which checks the copyright permissions for you).</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>View music player in action:</b> <a href="http://www.musicinpublic.com/">www.musicinpublic.com/</a>.</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>Create your own copy</b> from the <a href="http://www.osdata.com/music/musicplayer.html">original source code/</a> (presented for learning programming). Includes how to run this from your own computer if you don’t have a web site.</p>
+
+<br><table align="center" border="4" cellpadding="10">
+<tbody><tr><td align="center"><h3 align="center">OSdata.com is used in more than 300 colleges and universities around the world</h3>
+<p align="center"><a href="http://www.osdata.com/traffic.htm">Read details here.</a></p>
+<pa lign="left">Some or all of the material on this web page appears in the<br><a href="https://www.osdata.com/book.html">free downloadable college text book on computer programming</a>.<p></p></pa></td></tr>
+</tbody></table>
+
+<hr>
+
+<p align="center"><a href="https://www.osdata.com/book.html#toc">return to table of contents</a>
+<br><a href="https://www.osdata.com/book.html">free downloadable college text book</a></p>
+
+<h2 align="center"><a href="http://www.osdata.com/progbook/programmingindex.html">view text book</a><br>HTML file</h2>
+<p align="center">Because I no longer have the computer and software to make PDFs, the book is available as an HTML file, which you can convert into a PDF.</p>
+
+<!--start Michaelm t-shirts--><!--
+
+<table align="center" width="70%" border="0" cellspacing="0" cellpadding="0" background="http://www.osdata.com/center/pix/slicegw.jpg">
+<tr>
+<td valign="top"><img src="http://www.osdata.com/center/pix/mcurvelt.gif" width="33" height="13" border="0" alt="Curve left"></td>
+<td align="center" valign="top"><img src="http://www.osdata.com/center/pix/aapara.gif" width="416" height="20" border="0" alt="spacer"></td>
+<td align="right" valign="top"><img src="http://www.osdata.com/center/pix/mcurvert.gif" width="33" height="13" border="0"alt="Curve right"></td>
+</tr></table>
+
+<center><font face="Arial,Helvetica,sans-serif" style="font-size:10.0pt">thank you for your support.</font></center>
+
+<center><font face="Arial,Helvetica,sans-serif" color="#444444" style="font-size:8.5pt"><b>All emblems are now available on:</b>
+<br>Posters, Prints, Apparel, Baby, Housewares, Hats, Bags, Stickers, Buttons, Magnets &amp; More!</font>
+
+<br><br>
+
+<center><a href="http://www.michaelm.com/store/osdata.html" rel="nofollow"><img src="http://www.michaelm.com/store/pix/osdata3.jpg" width="72" height="72" border="0"></a> <a href="http://www.michaelm.com/store/sela.html" rel="nofollow"><img src="http://www.michaelm.com/store/pix/hselabtn.jpg" width="72" height="72" border="0"></a> <a href="http://www.michaelm.com/store/mightt.html" rel="nofollow"><img src="http://www.michaelm.com/store/pix/mightTbtn.jpg" width="97" height="72" border="0"></a> <a href="http://www.michaelm.com/store/jahlove.html" rel="nofollow"><img src="http://www.michaelm.com/store/pix/jahlovebtn.jpg" width="111" height="72" border="0"></a> <a href="http://www.michaelm.com/store/rastapeace.html" rel="nofollow"><img src="http://www.michaelm.com/store/pix/rpeacebtn.jpg" width="90" height="72" border="0"></a> <a href="http://www.michaelm.com/store/zionlion.html" rel="nofollow"><img src="http://www.michaelm.com/store/pix/zionlionbtn.jpg" width="66" height="72" border="0"></a></center>
+
+<h3 align="center">run your ad here</h3>
+
+<p align="center"><a href="http://www.kmthost.com/evaluation.htm"><img src="http://www.osdata.com/ads/webevaluation.jpg" width="640" height="116" border="0"></a></p>
+
+<!--end Michaelm t-shirts-->
+
+<hr>
+
+<!--img src="../../../pict/dmousesm.jpg" width="70" height="144" align="left">
+<h2 align="center"><font color="#cc44cc">Donate now<br>
+<i>or the mouse dies!!!</i></font></h2>
+<h3 align="center"><font color="#cc44cc"><i>OSdata.com is a visitor supported educational web site</i></font></h3>
+<p align="center"><font color="#cc44cc">To donate, <a href="http://www.michaelm.com/Merchant2/merchant.mvc?Screen=PROD&Store_Code=MA&Product_Code=osdDC&Category_Code=osddc" onMouseOver="window.status='make a donation';return true">click here</a>.</font></p>
+<p align="center"><b>Note:</b> Please mail donations to: Milo, PO Box 1361, Tustin, Calif, 92781, USA. Or use the link above to donate via credit cards.</p>
+<br clear="all"-->
+
+<table border="0" align="right" width="30%"><tbody><tr><td><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-timeline twitter-timeline-rendered" style="position: static; visibility: visible; display: inline-block; width: 520px; height: 600px; padding: 0px; border: none; max-width: 555px; min-width: 180px; margin-top: 0px; margin-bottom: 0px; min-height: 200px;" data-widget-id="profile:osdata" title="Twitter Timeline" src="./Data Movement Instructions in Assembly Language_files/saved_resource.html"></iframe>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td></tr></tbody></table>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;A web site on dozens of operating systems simply can’t be maintained by one person. This is a cooperative effort. If you spot an error in fact, grammar, syntax, or spelling, or a broken link, or have additional information, commentary, or constructive criticism, please e-mail <a href="https://www.osdata.com/email.htm" onmouseover="window.status=&#39;contact Milo (email)&#39;;return true">Milo</a>. If you have any extra copies of docs, manuals, or other materials that can assist in accuracy and completeness, please send them to Milo, PO Box 1361, Tustin, CA, USA, 92781.</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.osdata.com/privacy.htm" onmouseover="window.status=&#39;privacy policy&#39;;return true">Click here for our privacy policy</a>.</p>
+
+<hr>
+
+<center>
+<table align="center" border="0"><!--NAVIGATION TURN BUTTONS-->
+
+<tbody><tr>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/address.htm" onmouseover="window.status=&#39;addressing modes&#39;;return true"><img src="./Data Movement Instructions in Assembly Language_files/larr.gif" width="29" height="30" border="0" alt="previous page"></a></td>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/intarith.htm" onmouseover="window.status=&#39;integer arithmetic&#39;;return true"><img src="./Data Movement Instructions in Assembly Language_files/rarr.gif" width="29" height="30" border="0" alt="next page"></a></td>
+
+</tr>
+
+<tr>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/address.htm" onmouseover="window.status=&#39;addressing modes&#39;;return true">previous page</a></td>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/intarith.htm" onmouseover="window.status=&#39;integer arithmetic&#39;;return true">next page</a></td>
+
+</tr>
+
+</tbody></table>
+</center>
+
+<h3 align="center"><a href="https://www.osdata.com/index.htm" onmouseover="window.status=&#39;OSdata.com home page (table of contents)&#39;;return true">home page</a></h3>
+
+<h3 align="center">two levels up</h3>
+
+<p align="left"><a href="https://www.osdata.com/topic/topic.htm">special topics</a></p>
+
+<h3 align="center">one level up</h3>
+
+<ul>
+<li><a href="https://www.osdata.com/topic/language/program.htm">programming languages</a></li>
+<li><a href="https://www.osdata.com/topic/language/ada.htm">Ada</a></li>
+<li><a href="https://www.osdata.com/topic/language/algol.htm">ALGOL</a></li>
+<li><a href="https://www.osdata.com/topic/language/c.htm">C</a></li>
+<li><a href="https://www.osdata.com/topic/language/cplus.htm">C++</a></li>
+<li><a href="https://www.osdata.com/topic/language/cobol.htm">COBOL</a></li>
+<li><a href="https://www.osdata.com/topic/language/fortran.htm">FORTRAN</a></li>
+<li><a href="https://www.osdata.com/topic/language/java.htm">Java</a></li>
+<li><a href="https://www.osdata.com/topic/language/pascal.htm">Pascal</a></li>
+<li><a href="https://www.osdata.com/topic/language/perl.htm">Perl</a></li>
+<li><a href="https://www.osdata.com/topic/language/pli.htm">PL/I</a></li>
+</ul>
+
+<h3 align="center">peer level</h3>
+
+<ul>
+<li><a href="https://www.osdata.com/topic/language/asm/asmintro.htm">intro to assembly language</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/datarep.htm">data representation and number systems</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/register.htm">registers</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/address.htm">addressing modes</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/intarith.htm">integer arithmetic</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/floating.htm">floating arithmetic</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/bcdarith.htm">binary coded decimal</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/advmath.htm">advanced math</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/convert.htm">data conversion</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/logicop.htm">logical operations</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/shiftrot.htm">shift and rotate</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/bitstr.htm">bit and bit field manipulation</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/charstr.htm">character and string</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/table.htm">table operations</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/highlvl.htm">high level language support</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/progcont.htm">program control and condition codes</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/ioinst.htm">input/output</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/syscont.htm">system control</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/coproc.htm">coprocessor and multiprocessor</a></li>
+<li><a href="https://www.osdata.com/topic/language/asm/trapgen.htm">trap generating</a></li>
+</ul>
+
+<table border="2" align="center" width="60%">
+<tbody><tr><td align="center" bgcolor="#66ffff"><h2 align="center">free computer programming text book project</h2>
+<p align="center">Building a free downloadable text book on computer programming for university, college, community college, and high school classes in computer programming.</p>
+<p align="center"><big>If you like the idea of this project,<br>then please donate some money.
+<br><br><b>send donations to:</b>
+<br>Milo
+<br>PO Box 1361
+<br>Tustin, California 92781</big></p>
+<!--p align="left">&nbsp;&nbsp;&nbsp;&nbsp;At the time I write this message I am a few days from becoming homeless. That will greatly interfere with my ability to create this project, which can help nearly 20 million U.S. college students and more than 150 million students world-wide. I am looking for 30 rich people or corporations willing to donate $10 a month to my church so that the church can provide a place indoors for me to continue work. If you want to donate, please see <a href="../../../pledge.html">help project</a>. Thanks much.</p-->
+<p align="center"><big>Supporting the entire project:</big></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;If you have a business or organization that can support the entire cost of this project, please contact <a href="http://www.prntrkmt.org/">Pr Ntr Kmt</a> (my church)</p>
+<p align="center"><big><a href="https://www.osdata.com/pledge.html">more information on donating</a></big></p>
+<pa lign="left">Some or all of the material on this web page appears in the<br><a href="https://www.osdata.com/book.html">free downloadable college text book on computer programming</a>.<p></p> </pa></td></tr>
+</tbody></table>
+
+<hr>
+
+<p align="center">I do the news as an unpaid volunteer for <a href="http://www.kociradio.com/">KOCI</a> 101.5 FM, Newport Beach/Costa Mesa (also available on the web)</p>
+
+<hr>
+
+<!-- Search Google -->
+<center>
+<form method="GET" action="http://www.google.com/custom">
+<table bgcolor="#ffffff" border="2">
+<tbody><tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<a href="http://www.google.com/">
+<img src="./Data Movement Instructions in Assembly Language_files/Logo_25wht.gif" border="0" alt="Google" align="center"></a>
+<br>
+<input type="text" name="q" size="31" maxlength="255" value="">
+<br>
+<input type="submit" name="sa" value="Search">
+<input type="hidden" name="client" value="pub-4677813635044438">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="0911992725">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1;">
+<input type="hidden" name="hl" value="en">
+</td>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1242330569396958";
+/* TSOS */
+google_ad_slot = "9456247029";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="./Data Movement Instructions in Assembly Language_files/f.txt">
+</script>
+</td></tr></tbody></table>
+</form>
+</center>
+<!-- Search Google -->
+
+<p align="center"><img src="./Data Movement Instructions in Assembly Language_files/mademac.gif" width="143" height="50" alt="Made with Macintosh"></p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;This web site handcrafted on <a href="https://www.osdata.com/kind/mac.htm">Macintosh</a> <img src="./Data Movement Instructions in Assembly Language_files/mac.gif" width="32" height="32"> computers using <a href="http://members.aol.com/tombb/index.html">Tom Bender’s Tex-Edit Plus</a> <img src="./Data Movement Instructions in Assembly Language_files/texedit.gif" width="32" height="32"> and served using <a href="https://www.osdata.com/oses/freebsd.htm">FreeBSD</a> <img src="./Data Movement Instructions in Assembly Language_files/freebsdm.gif" width="32" height="32">.</p>
+
+<p align="center"><a href="http://www.anybrowser.org/campaign/"> <img src="./Data Movement Instructions in Assembly Language_files/bvbstar.gif" width="90" height="36" alt="Viewable With Any Browser" border="0"></a></p> 
+
+<hr>
+
+<small><p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Names and logos of various OSs are trademarks of their respective owners.</p></small>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Copyright © 2000, 2001 <a href="https://www.osdata.com/email.htm" onmouseover="window.status=&#39;contact Milo (email)&#39;;return true">Milo</a></p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Created: February 21, 2001 (from machcode.htm)</p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;Last Updated: February 26, 2001</p>
+
+<!--start support team endstub--><!--
+<hr>
+
+<table align="center" width="560" height="72" border="0">
+<tr align="center" valign="middle">
+<td rowspan="2" width="100"><a href="http://www.osdata.com/" onMouseOver="window.status='Operating Systems home page';return true" style="background:transparent"><img src="http://www.osdata.com/ads/osB2.jpg" width="100" height="100" border="0" alt="OSdata.com"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">osdata.com</font></a></td>
+
+<td colspan="8" width="75%" height="20" bgcolor="#eeeeee"><font face="Arial,Helvetica,sans-serif" color="444444" style="font-size:11pt">OSdata.com team support</font></td>
+</tr>
+
+<tr align="center">
+<td valign="middle" width="15">&nbsp;</td>
+
+<td valign="middle" width="20%"><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">logo design</font><br><a href="http://www.michaelm.com" onMouseOver="window.status='MichaelM logo design';return true" style="background:transparent"><img src="http://www.michaelm.com/mbtn/artist4.gif" width="75" height="72" border="0" alt="michaelm.com"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">michael<big>m</big>.com</font></a></td>
+
+<td width="20%"><font face="Arial,Helvetica,sans-serif" style="font-size:9pt">web hosting</font><br><a href="http://www.KMThost.com/" rel="nofollow" style="background:transparent"><img src="http://www.OSdata.com/ads/kmth1.jpg" width="88" height="72"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">KMThost.com</font></a></td>
+
+<td valign="middle" width="20%"><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">hemp clothing</font><br><a href="http://www.hempstar.com/" style="background:transparent" rel="nofollow"><img src="http://www.osdata.com/ads/hstars3.gif" width="89" height="72" border="0" alt="hempstar.com"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">hempStar.com</font></a></td>
+
+<td valign="middle" width="20%"><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">recording studio</font><br><a href="http://www.thissideofsanity.com/lesson/studio/recordingstudio.html" style="background:transparent"><img src="http://www.osdata.com/ads/logoca.jpg" width="88" height="60" border="0" alt="casoundstudios"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">casoundstudios</font></a></td>
+
+<td valign="middle" width="20%"><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">cleanse</font><br><a href="http://www.ezwaterflo.com/" style="background:transparent" rel="nofollow"><img src="http://www.osdata.com/ads/ezwfhdr1.gif" width="89" height="35" border="0" alt="hempstar.com"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">ezwaterflo.com</font></a></td>
+
+<td valign="middle" width="20%"><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">spiritual support</font><br><a href="http://www.prntrkmt.org/" style="background:transparent"><img src="http://www.osdata.com/pict/prntrkmtlogo.jpg" width="89" height="72" border="0" alt="Pr Ntr Kmt"><br><font face="Arial,Helvetica,sans-serif" style="font-size:7pt">Pr Ntr Kmt .org</font></a></td>
+
+<td valign="middle" width="15">&nbsp;</td>
+</tr>
+
+<!--tr><td align="center" colspan="8"><i>web hosting provided by:</i> <a href="http://www.osdata.com/1/webhost.html">VPSgrid.com</a--><!--
+<tr><td align="center" colspan="8"><i>web hosting provided by:</i> <a href="http://KMThost.com/">KMThost.com</a>
+<br>The author of this website can help you get <a href="http://www.osdata.com/1/webtraffic.html">high search engine placement</a>.</td></tr></table>
+
+<p align="center"><a href="http://www.prntrkmt.org/organization/marriage.html">ancient Egyptian marriages and weddings</a></p>
+<hr>
+<!--end support team endstub-->
+
+<hr>
+
+<p align="center"><a href="https://www.osdata.com/book.html#toc">return to table of contents</a>
+<br><a href="https://www.osdata.com/book.html">free downloadable college text book</a></p>
+
+<center>
+<table>
+
+<tbody><tr>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/address.htm" onmouseover="window.status=&#39;addressing modes&#39;;return true"><img src="./Data Movement Instructions in Assembly Language_files/larr.gif" width="29" height="30" border="0" alt="previous page"></a></td>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/intarith.htm" onmouseover="window.status=&#39;integer arithmetic&#39;;return true"><img src="./Data Movement Instructions in Assembly Language_files/rarr.gif" width="29" height="30" border="0" alt="next page"></a></td>
+
+</tr>
+
+<tr>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/address.htm" onmouseover="window.status=&#39;addressing modes&#39;;return true">previous page</a></td>
+
+<td align="center"><a href="https://www.osdata.com/topic/language/asm/intarith.htm" onmouseover="window.status=&#39;integer arithmetic&#39;;return true">next page</a></td>
+
+</tr>
+
+</tbody></table>
+</center>
+
+<!--2001: Feb 26, 21-->
+
+<script type="text/javascript" src="./Data Movement Instructions in Assembly Language_files/quant.js.download"></script>
+<script type="text/javascript">
+_qacct="p-18FnPaSIi1c_c";quantserve();</script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-18FnPaSIi1c_c.gif" style="display: none" height="1" width="1" alt="Quantcast"/></noscript>
+
+
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Data Movement Instructions in Assembly Language_files/widget_iframe.06c6ee58c3810956b7509218508c7b56.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Data Movement Instructions in Assembly Language_files/saved_resource(1).html"></iframe></body></html>

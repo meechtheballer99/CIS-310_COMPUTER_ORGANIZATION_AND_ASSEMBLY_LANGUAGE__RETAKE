@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" prefix="dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# perc: http://percussion.com/perc/elements/1.0/ og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+<script>
+var percGlobalErrors = [];
+window.onerror=function(msg, url, linenumber){
+var jsErrorMsg = 'JavaScript error -- ' + msg;
+percGlobalErrors.push(jsErrorMsg);
+return false;
+}
+</script> <link rel="canonical" href="https://www.csudh.edu/csc/" />
+<script>function percCanonicalRedirect(defaultDocument){if(document.querySelector("link[rel='canonical']")){canonicalLink=document.querySelector("link[rel='canonical']").getAttribute("href");}requestUrl=window.location.href;lastUrlElement=window.location.pathname.split('/').pop();urlPartsQueryString=requestUrl.split('?');urlPartsHash=requestUrl.split('#');if(typeof(canonicalLink)!=='undefined'&&lastUrlElement===defaultDocument){if(urlPartsQueryString.length>1||urlPartsHash.length>1){if(urlPartsQueryString.length>1){redirectUrl=canonicalLink+'?'+urlPartsQueryString[1];}else if(urlPartsHash.length>1){redirectUrl=canonicalLink+'#'+urlPartsHash[1];}}else{redirectUrl=canonicalLink;}window.location.replace(redirectUrl);}}</script>
+<script>
+percCanonicalRedirect('index');
+</script>
+<title>Computer Science Department</title>
+<link rel="preload" as="style" href="/web_resources/cm/themes/smoothness/jquery-ui-1.8.9.custom.css" type="text/css" media="all" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="/web_resources/cm/themes/smoothness/jquery-ui-1.8.9.custom.css"></noscript>
+<link rel="preload" as="style" href="/web_resources/widgets/emsEventList/css/PercEmsEventList.css" type="text/css" media="all" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="/web_resources/widgets/emsEventList/css/PercEmsEventList.css"></noscript>
+<link rel="preload" as="style" href="/web_resources/widgets/image/lightbox/lightbox.css" type="text/css" media="all" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="/web_resources/widgets/image/lightbox/lightbox.css"></noscript>
+<link rel="preload" as="style" href="/web_resources/themes/CSUDH-2017/csudh-main.css" type="text/css" media="all" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="/web_resources/themes/CSUDH-2017/csudh-main.css"></noscript>
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/
+(function( w ){
+"use strict";
+// rel=preload support test
+if( !w.loadCSS ){
+w.loadCSS = function(){};
+}
+// define on the loadCSS obj
+var rp = loadCSS.relpreload = {};
+// rel=preload feature support test
+// runs once and returns a function for compat purposes
+rp.support = (function(){
+var ret;
+try {
+ret = w.document.createElement( "link" ).relList.supports( "preload" );
+} catch (e) {
+ret = false;
+}
+return function(){
+return ret;
+};
+})();
+// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+// then change that media back to its intended value on load
+rp.bindMediaToggle = function( link ){
+// remember existing media attr for ultimate state, or default to 'all'
+var finalMedia = link.media || "all";
+function enableStylesheet(){
+link.media = finalMedia;
+}
+// bind load handlers to enable media
+if( link.addEventListener ){
+link.addEventListener( "load", enableStylesheet );
+} else if( link.attachEvent ){
+link.attachEvent( "onload", enableStylesheet );
+}
+// Set rel and non-applicable media type to start an async request
+// note: timeout allows this to happen async to let rendering continue in IE
+setTimeout(function(){
+link.rel = "stylesheet";
+link.media = "only x";
+});
+// also enable media after 3 seconds,
+// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+setTimeout( enableStylesheet, 3000 );
+};
+
+// loop through link elements in DOM
+rp.poly = function(){
+// double check this to prevent external calls from running
+if( rp.support() ){
+return;
+}
+var links = w.document.getElementsByTagName( "link" );
+for( var i = 0; i < links.length; i++ ){
+var link = links[ i ];
+// qualify links to those with rel=preload and as=style attrs
+if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+// prevent rerunning on link
+link.setAttribute( "data-loadcss", true );
+// bind listeners to toggle media back
+rp.bindMediaToggle( link );
+}
+}
+};
+
+// if unsupported, run the polyfill
+if( !rp.support() ){
+// run once at least
+rp.poly();
+// rerun poly on an interval until onload
+var run = w.setInterval( rp.poly, 500 );
+if( w.addEventListener ){
+w.addEventListener( "load", function(){
+rp.poly();
+w.clearInterval( run );
+} );
+} else if( w.attachEvent ){
+w.attachEvent( "onload", function(){
+rp.poly();
+w.clearInterval( run );
+} );
+}
+}
+// commonjs
+if( typeof exports !== "undefined" ){
+exports.loadCSS = loadCSS;
+}
+else {
+w.loadCSS = loadCSS;
+}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+<style>
+div#banner-wrapper .perc-widget-puff {
+    height: 200px;
+}
+div#banner-wrapper .perc-widget-puff .videoDiv>div {
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+</style>
+<meta property="dcterms:type" content="page"/>
+<meta property="dcterms:source" content="03-Tertiary"/>
+<meta property="dcterms:created" content="2019-11-26T12:25:03"/>
+<meta property="dcterms:modified" content="2021-05-21T13:29:22"/>
+<meta property="dcterms:alternative" content="DEPARTMENT OF COMPUTER SCIENCE"/>
+
+
+<script src="/web_resources/cm/jslib/jquery.js"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<style>
+img.perc-notpubliclink {
+    border: 0 !important;
+    opacity: 1;
+}
+</style>
+<style>
+   button.expand {
+     display:none; }
+.expand {
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+.expand-content {
+    display: block;
+    background-color: white;
+}
+@media only screen and (max-width:1040px){
+  button.expand {
+    display:block;
+    background-color:#e3e3e3;  }
+  .expand-content {
+    display:none;  }
+}
+</style>
+<script>
+$(function() {
+$( window ).resize(function() {
+if($(window).width() < 1025)
+$('#content-row-1  .perc-horizontal.ui-helper-clearfix').append($('#sidebar-latest-news'));
+else
+$('#sidebar-menu').after($('#sidebar-latest-news'));
+});$( window ).resize();});
+
+$(function() {
+$( window ).resize(function() {
+if($(window).width() < 1025)
+$('#content-row-1  .perc-horizontal.ui-helper-clearfix').append($('#sidebar-events'));
+else
+$('#sidebar-latest-news').after($('#sidebar-events'));
+});$( window ).resize();});
+
+$(function() {
+$( window ).resize(function() {
+if($(window).width() < 1025)
+$('#content-row-1  .perc-horizontal.ui-helper-clearfix').append($('#sidebar-extra-1'));
+else
+$('#sidebar-events').after($('#sidebar-extra-1'));
+});$( window ).resize();});
+</script>
+
+<script async type="text/javascript" src="/Assets/global/scripts/AskTeddy.js" ></script>
+<link rel="stylesheet" href="/Assets/global/css/mobile-move-teddy-right.css" media="all" />
+
+<style> .sidebar { /*border: solid black 1px;*/ width: 22%; height: 20%; overflow: auto; position: -webkit-sticky; position: sticky; top: 1%; } .main { width: 78%; display: -webkit-box; display: flex; flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; } .wrapper { display: -webkit-box; display: flex; -webkit-box-pack: justify; }  #home_button{ margin: auto; display: inline-block; color: #fff; /*border: 1px solid black;*/ background: #860038; cursor: pointer; vertical-align: middle; text-align: center; } table,th,tr,td{ margin-left : 5%; margin-top : 9%; text-align: center; /*border:solid black 1px;*/ border-collapse: collapse; } #home_cell{ text-align:center; background:#860038; color:white; } </style>
+
+
+<style> .testimonials{ padding: 40px 0; background: #f1f1f1; color: #434343; text-align: center; } .inner{ max-width: 1200px; margin: auto; overflow: hidden; padding: 0 20px; } .border{ width: 160px; height: 5px; background: #6ab04c; margin: 26px auto; } .row{ display: flex; flex-wrap: wrap; justify-content: center; } .col{ flex: 33.33%; max-width: 33.33%; box-sizing: border-box; padding: 15px; } .testimonial{ background: red; padding: 30px; } .testimonial img{ width: 100px; height: 100px; border-radius: 50%; } .name{ font-size: 20px; text-transform: uppercase; margin: 20px 0; } .stars{ color: #6ab04c; margin-bottom: 20px; } @media screen and (max-width:960px) { .col{ flex: 100%; max-width: 80%; } } @media screen and (max-width:600px) { .col{ flex: 100%; max-width: 100%; } } </style> <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> <script> /*! http://responsiveslides.com v1.55 by @viljamis */ (function(c,K,C){c.fn.responsiveSlides=function(m){var a=c.extend({auto:!0,speed:500,timeout:4E3,pager:!1,nav:!1,random:!1,pause:!1,pauseControls:!0,prevText:"Previous",nextText:"Next",maxwidth:"",navContainer:"",manualControls:"",namespace:"rslides",before:c.noop,after:c.noop},m);return this.each(function(){C++;var f=c(this),u,t,v,n,q,r,p=0,e=f.children(),D=e.length,h=parseFloat(a.speed),E=parseFloat(a.timeout),w=parseFloat(a.maxwidth),g=a.namespace,d=g+C,F=g+"_nav "+d+"_nav",x=g+"_here",k=d+"_on", y=d+"_s",l=c("<ul class='"+g+"_tabs "+d+"_tabs' />"),z={"float":"left",position:"relative",opacity:1,zIndex:2},A={"float":"none",position:"absolute",opacity:0,zIndex:1},G=function(){var b=(document.body||document.documentElement).style,a="transition";if("string"===typeof b[a])return!0;u=["Moz","Webkit","Khtml","O","ms"];var a=a.charAt(0).toUpperCase()+a.substr(1),c;for(c=0;c<u.length;c++)if("string"===typeof b[u[c]+a])return!0;return!1}(),B=function(b){a.before(b);G?(e.removeClass(k).css(A).eq(b).addClass(k).css(z), p=b,setTimeout(function(){a.after(b)},h)):e.stop().fadeOut(h,function(){c(this).removeClass(k).css(A).css("opacity",1)}).eq(b).fadeIn(h,function(){c(this).addClass(k).css(z);a.after(b);p=b})};a.random&&(e.sort(function(){return Math.round(Math.random())-.5}),f.empty().append(e));e.each(function(a){this.id=y+a});f.addClass(g+" "+d);m&&m.maxwidth&&f.css("max-width",w);e.hide().css(A).eq(0).addClass(k).css(z).show();G&&e.show().css({"-webkit-transition":"opacity "+h+"ms ease-in-out","-moz-transition":"opacity "+ h+"ms ease-in-out","-o-transition":"opacity "+h+"ms ease-in-out",transition:"opacity "+h+"ms ease-in-out"});if(1<e.length){if(E<h+100)return;if(a.pager&&!a.manualControls){var H=[];e.each(function(a){a+=1;H+="<li><a href='#' class='"+y+a+"'>"+a+"</a></li>"});l.append(H);m.navContainer?c(a.navContainer).append(l):f.after(l)}a.manualControls&&(l=c(a.manualControls),l.addClass(g+"_tabs "+d+"_tabs"));(a.pager||a.manualControls)&&l.find("li").each(function(a){c(this).addClass(y+(a+1))});if(a.pager||a.manualControls)r= l.find("a"),t=function(a){r.closest("li").removeClass(x).eq(a).addClass(x)};a.auto&&(v=function(){q=setInterval(function(){e.stop(!0,!0);var b=p+1<D?p+1:0;(a.pager||a.manualControls)&&t(b);B(b)},E)},v());n=function(){a.auto&&(clearInterval(q),v())};a.pause&&f.hover(function(){clearInterval(q)},function(){n()});if(a.pager||a.manualControls)r.bind("click",function(b){b.preventDefault();a.pauseControls||n();b=r.index(this);p===b||c("."+k).queue("fx").length||(t(b),B(b))}).eq(0).closest("li").addClass(x), a.pauseControls&&r.hover(function(){clearInterval(q)},function(){n()});if(a.nav){g="<a href='#' class='"+F+" prev'>"+a.prevText+"</a><a href='#' class='"+F+" next'>"+a.nextText+"</a>";m.navContainer?c(a.navContainer).append(g):f.after(g);var d=c("."+d+"_nav"),I=d.filter(".prev");d.bind("click",function(b){b.preventDefault();b=c("."+k);if(!b.queue("fx").length){var d=e.index(b);b=d-1;d=d+1<D?p+1:0;B(c(this)[0]===I[0]?b:d);(a.pager||a.manualControls)&&t(c(this)[0]===I[0]?b:d);a.pauseControls||n()}}); a.pauseControls&&d.hover(function(){clearInterval(q)},function(){n()})}}if("undefined"===typeof document.body.style.maxWidth&&m.maxwidth){var J=function(){f.css("width","100%");f.width()>w&&f.css("width",w)};J();c(K).bind("resize",function(){J()})}})}})(jQuery,this,0); </script> <style> .rslides { position: relative; list-style: none; overflow: hidden; width: 100%; padding: 0; margin: 0; } .rslides li { -webkit-backface-visibility: hidden; position: absolute; display: none; width: 100%; left: 0; top: 0; } .rslides li:first-child { position: relative; display: block; float: left; } .rslides img { display: block; height: auto; float: left; width: 100%; border: 0; } </style> <script> $(function() { $(".rslides").responsiveSlides(); }); </script>
+
+</head>
+
+<body>
+<input type="hidden" id="perc_linkback_id" value="61-101-136469"/>
+<h3 style="display:none;">Computer Science Department</h3>
+
+
+
+<div  class="perc-region perc-fixed perc-vertical hspan_12 short-banner "  data-noautoresize="false" id="container"> <div class=" perc-vertical "><div  class="perc-region perc-horizontal ui-helper-clearfix vspan_2 "  data-noautoresize="false" id="header"> <div class=" perc-horizontal ui-helper-clearfix "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="header-left"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><p class=""><a href="https://www.csudh.edu/" title="CSUDH Home"><img alt="The CSUDH" height="36" src="/Assets/templates/header/CSUDH-RGB-Logo-Burgundy-Background.png" title="The CSUDH" width="175"/></a></p></div></div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="header-nav"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+        <div role="navigation" aria-label="Main Navigation" class=" perc-navbar">
+<script >
+window.addEventListener('DOMContentLoaded', function() {
+$( document ).ready(function() {
+// bind a click event to the 'skip' link
+$(".perc-navigation-skiplink").click(function(event) {
+// strip the leading hash and declare
+// the content we're skipping to
+var skipTo="#"+this.href.split('#')[1];
+// Setting 'tabindex' to -1 takes an element out of normal
+// tab flow but allows it to be focused via javascript
+$(skipTo).attr('tabindex', -1).on('blur focusout', function () {
+// when focus leaves this element,
+// remove the tabindex attribute
+$(this).removeAttr('tabindex');
+}).focus(); // focus on the content container
+});
+});
+});
+</script>
+<a href="#content-wrapper-area" class="perc-navigation-skiplink" tabindex="1">Skip to content</a>
+<ul role="menubar" class="sf-menu perc-navbar-sfhorizontal">
+<li role="presentation" class="nav-level-2 nav-entry-1 list-position-1 "><a id="perc-navigation-menuitem-nav-level-2-nav-entry-1-list-position-1-441496117" href="/future-students/" role="menuitem" title="Future Students">Future Students</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-1-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-1 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-1-list-position-1-441496117" href="/future-students/explore/" role="menuitem" title="Explore">Explore</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-2 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-2-list-position-2-441496117" href="/future-students/first-time-first-year/" role="menuitem" title="First-Time, First-Year (Freshmen) - Fall 2022">First-Time, First-Year (Freshmen) - Fall 2022</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-3 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-3-list-position-3-441496117" href="/future-students/transfer/" role="menuitem" title="Transfer - Fall 2022">Transfer - Fall 2022</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-4 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-4-list-position-4-441496117" href="/future-students/new-toros/" role="menuitem" title="New Toros">New Toros</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-5 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-5-list-position-5-441496117" href="https://www.csudh.edu/future-students/outreach/counselor" role="menuitem" title="Counselor Resources">Counselor Resources</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-6 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-6-list-position-6-441496117" href="/future-students/international/" role="menuitem" title="International - Fall 2022">International - Fall 2022</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-7 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-7-list-position-7-441496117" href="/future-students/returning/" role="menuitem" title="Returning">Returning</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-8 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-8-list-position-8-441496117" href="https://www.csudh.edu/gsr/graduate-studies/" role="menuitem" title="Graduate - Fall 2022">Graduate - Fall 2022</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-9 list-position-9 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-9-list-position-9-441496117" href="/future-students/spring-2022-admissions/" role="menuitem" title="Spring 2022 Admissions">Spring 2022 Admissions</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-10 list-position-10 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-10-list-position-10-441496117" href="https://www.csudh.edu/Assets/csudh-sites/gei/docs/2020-21%20CSUDH-Notice-of-Nondiscrimination.pdf" role="menuitem" title="Notice of Non-discrimination [PDF]">Notice of Non-discrimination [PDF]</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-2 list-position-1 mobile-menu"><a id="perc-navigation-menuitem-nav-level-2-nav-entry-2-list-position-1-441496117" href="/academics/" role="menuitem" title="Academics">Academics</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-2-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-11 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-11-list-position-1-441496117" href="/student-support/academic-services/" role="menuitem" title="Academic Services">Academic Services</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-12 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-12-list-position-2-441496117" href="/academic-affairs/accreditation/" role="menuitem" title="Accreditation Information">Accreditation Information</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-13 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-13-list-position-3-441496117" href="/campus-calendar/" role="menuitem" title="Campus Calendar">Campus Calendar</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-14 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-14-list-position-4-441496117" href="/class-schedule/" role="menuitem" title="Class Schedule">Class Schedule</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-15 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-15-list-position-5-441496117" href="/academics/colleges/" role="menuitem" title="Colleges">Colleges</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-16 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-16-list-position-6-441496117" href="/academics/csu-online/" role="menuitem" title="CSU Fully Online Courses">CSU Fully Online Courses</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-17 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-17-list-position-7-441496117" href="/academics/degree-programs/" role="menuitem" title="Degree Programs">Degree Programs</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-18 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-18-list-position-8-441496117" href="/ceie/" role="menuitem" title="Extended &amp; International Education">Extended &amp; International Education</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-19 list-position-9 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-19-list-position-9-441496117" href="/records-registration/graduation/" role="menuitem" title="Graduation">Graduation</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-20 list-position-10 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-20-list-position-10-441496117" href="/ceie/distance-learning/" role="menuitem" title="Online &amp; TV Learning">Online &amp; TV Learning</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-21 list-position-11 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-21-list-position-11-441496117" href="/academics/pre-doctoral-programs/" role="menuitem" title="Pre-Doctoral Programs">Pre-Doctoral Programs</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-22 list-position-12 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-22-list-position-12-441496117" href="/student-conduct/report-an-incident/" role="menuitem" title="Report an Incident">Report an Incident</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-23 list-position-13 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-23-list-position-13-441496117" href="/student-conduct/" role="menuitem" title="Student Conduct">Student Conduct</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-24 list-position-14 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-24-list-position-14-441496117" href="/uac/" role="menuitem" title="University Advisement Center">University Advisement Center</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-25 list-position-15 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-25-list-position-15-441496117" href="/academic-affairs/centers-institutes/" role="menuitem" title="University Centers &amp; Institutes">University Centers &amp; Institutes</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-26 list-position-16 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-26-list-position-16-441496117" href="/library/" role="menuitem" title="University Library">University Library</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-3 list-position-1 mobile-menu"><a id="perc-navigation-menuitem-nav-level-2-nav-entry-3-list-position-1-441496117" href="/campus-life/" role="menuitem" title="Campus Life">Campus Life</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-3-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-27 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-27-list-position-1-441496117" href="http://www.gotoros.com/" role="menuitem" title="Athletics">Athletics</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-28 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-28-list-position-2-441496117" href="/campus-calendar/" role="menuitem" title="Campus Calendar">Campus Calendar</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-29 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-29-list-position-3-441496117" href="/visit-us/campus-map-directions/" role="menuitem" title="Campus Map &amp; Directions">Campus Map &amp; Directions</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-30 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-30-list-position-4-441496117" href="/Assets/csudh-sites/dhpd/docs/2019-annual-safety-plan.pdf" role="menuitem" target='_blank' title="Campus Safety Plan [PDF]">Campus Safety Plan [PDF]</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-31 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-31-list-position-5-441496117" href="/slice/" role="menuitem" title="Center for Service Learning, Internships &amp; Civic Engagement">Center for Service Learning, Internships &amp; Civic Engagement</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-32 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-32-list-position-6-441496117" href="/student-life/greek-life/" role="menuitem" title="Greek Life">Greek Life</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-33 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-33-list-position-7-441496117" href="http://www.lsucsudh.org/" role="menuitem" title="Loker Student Union">Loker Student Union</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-34 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-34-list-position-8-441496117" href="/msa/" role="menuitem" title="Male Success Alliance">Male Success Alliance</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-35 list-position-9 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-35-list-position-9-441496117" href="/mca/" role="menuitem" title="Multicultural Affairs">Multicultural Affairs</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-36 list-position-10 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-36-list-position-10-441496117" href="/student-conduct/report-an-incident/" role="menuitem" title="Report an Incident">Report an Incident</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-37 list-position-11 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-37-list-position-11-441496117" href="/student-life/student-organizations/" role="menuitem" title="Student Clubs &amp; Organization">Student Clubs &amp; Organization</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-38 list-position-12 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-38-list-position-12-441496117" href="http://www.asicsudh.com/" role="menuitem" title="Student Government (ASI)">Student Government (ASI)</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-39 list-position-13 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-39-list-position-13-441496117" href="/ceie-intl/study-abroad/" role="menuitem" title="Study Abroad">Study Abroad</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-40 list-position-14 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-40-list-position-14-441496117" href="https://www.csudh.edu/gei/" role="menuitem" title="Title IX">Title IX</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-41 list-position-15 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-41-list-position-15-441496117" href="/housing/" role="menuitem" title="University Housing">University Housing</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-42 list-position-16 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-42-list-position-16-441496117" href="/vrc/" role="menuitem" title="Veterans Resource Center">Veterans Resource Center</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-43 list-position-17 mobile-menu"><a id="perc-navigation-menuitem-nav-level-3-nav-entry-43-list-position-17-441496117" href="/visit-us/" role="menuitem" title="Visit Us">Visit Us</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-44 list-position-18 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-44-list-position-18-441496117" href="/wrc/" role="menuitem" title="Women's Resource Center">Women's Resource Center</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-4 list-position-1 "><a id="perc-navigation-menuitem-nav-level-2-nav-entry-4-list-position-1-441496117" href="/student-support/" role="menuitem" title="Student Support">Student Support</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-4-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-45 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-45-list-position-1-441496117" href="/student-support/academic-services/" role="menuitem" title="Academic Services">Academic Services</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-46 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-46-list-position-2-441496117" href="/career-center/" role="menuitem" title="Career Center">Career Center</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-47 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-47-list-position-3-441496117" href="/current-students/" role="menuitem" title="Current Students">Current Students</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-48 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-48-list-position-4-441496117" href="/eop/" role="menuitem" title="Educational Opportunity Program">Educational Opportunity Program</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-49 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-49-list-position-5-441496117" href="/educational-partnerships/" role="menuitem" title="Educational Partnerships">Educational Partnerships</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-50 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-50-list-position-6-441496117" href="/ete/" role="menuitem" title="Encounter to Excellence">Encounter to Excellence</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-51 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-51-list-position-7-441496117" href="/student-support/food-shelter/" role="menuitem" title="Food &amp; Shelter Resources">Food &amp; Shelter Resources</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-52 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-52-list-position-8-441496117" href="https://www.csudh.edu/student-conduct/report-an-incident/" role="menuitem" title="Report an Incident/Title IX">Report an Incident/Title IX</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-53 list-position-9 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-53-list-position-9-441496117" href="/sdrc/" role="menuitem" title="Student disAbility Resource Center">Student disAbility Resource Center</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-54 list-position-10 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-54-list-position-10-441496117" href="/shs/" role="menuitem" title="Student Health Services">Student Health Services</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-55 list-position-11 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-55-list-position-11-441496117" href="/sps/" role="menuitem" title="Student Psychological Services">Student Psychological Services</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-56 list-position-12 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-56-list-position-12-441496117" href="/tltc/" role="menuitem" title="Toro Learning &amp; Testing Center">Toro Learning &amp; Testing Center</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-5 list-position-1 mobile-menu"><a id="perc-navigation-menuitem-nav-level-2-nav-entry-5-list-position-1-441496117" href="/about/" role="menuitem" title="About">About</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-5-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-57 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-57-list-position-1-441496117" href="/administration/" role="menuitem" title="Administration">Administration</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-58 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-58-list-position-2-441496117" href="/about/points-distinction/" role="menuitem" title="Points of Distinction">Points of Distinction</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-59 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-59-list-position-3-441496117" href="/visit-us/campus-map-directions/" role="menuitem" title="Campus Map &amp; Directions">Campus Map &amp; Directions</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-60 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-60-list-position-4-441496117" href="/about/history-mission-vision/" role="menuitem" title="History, Mission &amp; Vision">History, Mission &amp; Vision</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-61 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-61-list-position-5-441496117" href="/about/campus-facts/" role="menuitem" title="Campus Facts &amp; Figures">Campus Facts &amp; Figures</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-62 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-62-list-position-6-441496117" href="/about/dominguez-rising/" role="menuitem" title="Dominguez Rising">Dominguez Rising</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-63 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-63-list-position-7-441496117" href="https://news.csudh.edu/" role="menuitem" title="News &amp; Media">News &amp; Media</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-64 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-64-list-position-8-441496117" href="/about/contact-us/" role="menuitem" title="Contact Us">Contact Us</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-6 list-position-1 mobile-menu"><a id="perc-navigation-menuitem-nav-level-2-nav-entry-6-list-position-1-441496117" href="/alumni/" role="menuitem" title="Alumni">Alumni</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-6-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-65 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-65-list-position-1-441496117" href="/alumni/alumni-association/" role="menuitem" title="Alumni Association">Alumni Association</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-66 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-66-list-position-2-441496117" href="/alumni/alumni-events/" role="menuitem" title="Alumni Events">Alumni Events</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-67 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-67-list-position-3-441496117" href="/alumni/alumni-news/" role="menuitem" title="Alumni News">Alumni News</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-68 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-68-list-position-4-441496117" href="/alumni/alumni-services/" role="menuitem" title="Alumni Services">Alumni Services</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-69 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-69-list-position-5-441496117" href="/alumni/advisory-council/" role="menuitem" title="Advisory Council">Advisory Council</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-70 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-70-list-position-6-441496117" href="/alumni/dinner-with-toros/" role="menuitem" title="Dinner with Toros">Dinner with Toros</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-71 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-71-list-position-7-441496117" href="/alumni/scholarships/" role="menuitem" title="Scholarships">Scholarships</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-72 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-72-list-position-8-441496117" href="/alumni/im-a-toro/" role="menuitem" title="I'm A Toro">I'm A Toro</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-73 list-position-9 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-73-list-position-9-441496117" href="/alumni/faq/" role="menuitem" title="FAQ">FAQ</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-74 list-position-10 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-74-list-position-10-441496117" href="/alumni/meet-our-staff/" role="menuitem" title="Meet Our Staff">Meet Our Staff</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-75 list-position-11 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-75-list-position-11-441496117" href="/ua/" role="menuitem" title="University Advancement">University Advancement</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-7 list-position-1 "><a id="perc-navigation-menuitem-nav-level-2-nav-entry-7-list-position-1-441496117" href="https://www.csudh.edu/future-students/apply/" role="menuitem" title="Apply">Apply</a></li>
+<li role="presentation" class="nav-level-2 nav-entry-8 list-position-1 "><a id="perc-navigation-menuitem-nav-level-2-nav-entry-8-list-position-1-441496117" href="https://toropay.csudh.edu/C20032_ustores/web/store_main.jsp?STOREID=8&SINGLESTORE=true" role="menuitem" title="Give">Give</a></li>
+<li role="presentation" class="nav-level-2 nav-entry-9 list-position-1 mobile-menu"><a id="perc-navigation-menuitem-nav-level-2-nav-entry-9-list-position-1-441496117" href="/visit-us/" role="menuitem" title="Visit Us">Visit Us</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-9-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-76 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-76-list-position-1-441496117" href="https://www.csudh.edu/future-students/more-info/visit-csudh/schedule-a-tour" role="menuitem" title="Schedule A Tour">Schedule A Tour</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-77 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-77-list-position-2-441496117" href="/visit-us/campus-map-directions/" role="menuitem" title="Campus Map &amp; Directions">Campus Map &amp; Directions</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-78 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-78-list-position-3-441496117" href="/visit-us/parking/" role="menuitem" title="Parking">Parking</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-79 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-79-list-position-4-441496117" href="/visit-us/traffic-advisory/" role="menuitem" title="Traffic Advisory">Traffic Advisory</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-80 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-80-list-position-5-441496117" href="/visit-us/construction-access/" role="menuitem" title="Access During Construction">Access During Construction</a></li>
+</ul></li><li role="presentation" class="nav-level-2 nav-entry-10 list-position-1 "><a id="perc-navigation-menuitem-nav-level-2-nav-entry-10-list-position-1-441496117" href="/administration/" role="menuitem" title="Administration">Administration</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-2-nav-entry-10-list-position-1-441496117">
+<li role="presentation" class="nav-level-3 nav-entry-81 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-81-list-position-1-441496117" href="/president/" role="menuitem" title="Office of the President">Office of the President</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-82 list-position-2 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-82-list-position-2-441496117" href="/academic-affairs/" role="menuitem" title="Academic Affairs">Academic Affairs</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-83 list-position-3 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-83-list-position-3-441496117" href="/student-affairs/" role="menuitem" title="Student Affairs">Student Affairs</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-84 list-position-4 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-84-list-position-4-441496117" href="/ua/" role="menuitem" title="University Advancement">University Advancement</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-85 list-position-5 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-85-list-position-5-441496117" href="/admin-finance/" role="menuitem" title="Administration &amp; Finance">Administration &amp; Finance</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-86 list-position-6 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-86-list-position-6-441496117" href="/it/" role="menuitem" title="Information Technology">Information Technology</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-87 list-position-7 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-87-list-position-7-441496117" href="/academic-senate/" role="menuitem" title="Academic Senate">Academic Senate</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-88 list-position-8 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-88-list-position-8-441496117" href="/administration/all-departments/" role="menuitem" title="All Departments">All Departments</a></li>
+</ul></li></ul>
+<div style="clear:both"></div>
+</div>
+    
+</div>
+</div></div><div  class="perc-region perc-fixed perc-vertical "  data-noautoresize="false" id="header-quicks"> <div class=" perc-vertical "><div  class="perc-region perc-fixed perc-horizontal ui-helper-clearfix "  data-noautoresize="false" id="quicks-top"> <div class=" perc-horizontal ui-helper-clearfix "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="header-right-rich"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><ul><li class=""><a href="/future-students/explore/" title="Explore - For Applicants"><img alt="Checkmark Icon" height="22" src="/Assets/templates/header/apply-icon.png" title="Apply" width="25"/>APPLY</a></li><li class=""><a href="/visit-us/" title="Visit Us"><img alt="Map Marker Icon" height="21" src="/Assets/templates/header/visit-icon.png" title="Visit" width="15"/>VISIT</a></li><li><a class="" href="https://toropay.csudh.edu/C20032_ustores/web/store_main.jsp?STOREID=8&amp;SINGLESTORE=true"><img alt="Hand Holding Heart Icon" height="25" src="/Assets/templates/header/give-icon.png" title="Give" width="30"/>GIVE</a></li></ul></div></div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="header-right-html"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+<style>
+label.hidden {
+    display: none;
+}
+div#search-box-wrapper-area>div {
+    width: 60%;
+}
+#search-box-wrapper-area input#q {
+    color: #7d7d7d;
+    font-family: 'ProxNova-Light', sans-serif;
+    font-size: 29px;
+    display: block;
+    float: left;
+    background-color: transparent;
+    border-width: 0px 0 1px 0;
+    border-color: #707070;
+    border-style: solid;
+    width: 80%;
+}
+
+#search-box-wrapper-area input[type="submit"] {
+    background: #464646;
+    background-color: #464646;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    border: 0;
+    padding: 9px 25px;
+    margin-top: 0;
+    display: inline-block;
+    position: absolute;
+    font-family: 'ProxNova-SemiBold', sans-serif;
+    margin-left: -60px;
+    font-size: 16px;
+}
+</style> 
+<ul> 
+ <li><a id="staff-menu-icon" class="staff-menu-icon"><i class="fa fa-ellipsis-h" aria-hidden="true" title="Staff Menu"></i> </a></li> 
+ <li><a id="search-box-show-hide" class="search-icon"><i class="fa fa-search" aria-hidden="true" title="Search"></i></a></li> 
+</ul> 
+<div id="search-box-wrapper-area"> 
+ <div> 
+  <form action="https://www.google.com/cse" method="get"> 
+   <input name="cx" type="hidden" value="014923810474251600839:2ikns0f3yye"> 
+   <input name="ie" type="hidden" value="UTF-8"> 
+   <label class="hidden" for="q">Search</label> 
+   <input alt="Search" id="q" maxlength="255" name="q" title="search" type="search" placeholder="Search Cal State Dominguez Hills"> 
+   <input type="submit" value="SEARCH"> 
+  </form> 
+ </div> 
+</div>
+
+</div>
+</div></div></div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="staff-menu-wrapper"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+<div id="staff-menu"> 
+ <div class="left-side-sm"> 
+  <div class="pull-left-sm"> 
+   <a href="https://my.csudh.edu" class="large-icons" title="Student portal login"><img src="/Assets/templates/header/cogwheel-icon.png" alt="Cogwheel Icon" title="myCSUDH"> <span>myCSUDH</span></a> 
+   <br> 
+   <a href="http://ems.csudh.edu/mastercalendar/MasterCalendar.aspx" class="large-icons" title="Calendar"><img src="/Assets/templates/header/calendar-icon.png" alt="Calendar Icon" title="Calendar"> <span>Calendar</span></a> 
+  </div> 
+  <ul> 
+   <li><a href="//www.csudh.edu/faculty-staff/">Faculty/Staff</a></li> 
+   <li><a href="//www.csudh.edu/faculty-affairs/">Faculty Affairs</a></li> 
+   <li><a href="//www.csudh.edu/alumni/">Alumni</a></li> 
+   <li><a href="//www.csudh.edu/administration/">Administration</a></li> 
+   <li><a href="//www.csudh.edu/library/">Library</a></li> 
+   <li><a href="//toro.csudh.edu/">Blackboard</a></li> 
+   <li><a href="//www.csudh.edu/financial-aid/">Financial Aid</a></li> 
+   <li><a href="//www.csudh.edu/university-catalog/">University Catalog</a></li> 
+   <li><a href="//www.csudh.edu/hr/">Human Resources</a></li> 
+   <li><a href="//www.csudh.edu/career-center/">Career Center</a></li> 
+   <li><a href="//www.csudh.edu/hr/career-opportunities/">Careers at CSUDH</a></li> 
+   <li><a href="//csudh.service-now.com">IT Help Desk</a></li> 
+   <li><a href="https://phone-directory.csudh.edu">Directory</a></li> 
+  </ul> 
+  <a href="http://mail.toromail.csudh.edu/" class="small-icons"><img src="/Assets/templates/header/email-icon.png" alt="Email Icon" title="TORO email"> <span>TORO email (Student)</span></a> 
+  <a href="https://outlook.office365.com/" class="small-icons"><img src="/Assets/templates/header/email-icon.png" alt="Email Icon" title="Office 365 Webmail"> <span>Office 365 Webmail</span></a> 
+ </div> 
+ <div class="right-side-sm"> 
+  <ul> 
+   <li><a href="https://www.facebook.com/csudh/"><i class="fa fa-facebook" title="Facebook"></i></a> </li> 
+   <li><a href="http://twitter.com/dominguezhills"><i class="fa fa-twitter" title="Twitter"></i></a> </li> 
+   <li><a href="http://instagram.com/csudominguezhills?ref=badge"><i class="fa fa-instagram" title="Instagram"></i></a> </li> 
+   <li><a href="https://www.linkedin.com/school/csudh/"><i class="fa fa-linkedin" title="LinkedIn"></i></a> </li> 
+   <li><a href="http://www.youtube.com/csudhtv"><i class="fa fa-youtube-play" title="YouTube"></i></a> </li> 
+  </ul> 
+ </div> 
+</div>
+
+</div>
+</div></div></div></div></div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="banner-wrapper"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+    
+       
+       <div class="csudhBannerImage">
+                    <style>
+#banner-wrapper { background-image: url(/Assets/csudh-sites/csc/images/banners/banner_logo_nsm_enterence.png); }
+</style>
+               </div>
+    
+    
+</div>
+        <div class="perc-widget" >
+
+    
+<div role="navigation" class="perc-breadcrumb" aria-label="Breadcrumb Navigation">
+<ul class="perc-breadcrumb-main" role="menubar">
+<li class="perc-list-element perc-list-first perc-list-odd" role="presentation"><a href="/" role="menuitem">Home</a></li>
+<li class="perc-list-element perc-list-last perc-list-even" role="presentation">&nbsp;/&nbsp;<a href="/csc/" role="menuitem">Computer Science Department</a></li>
+</ul>
+</div>
+
+</div>
+</div></div><div  class="perc-region perc-fixed perc-vertical "  data-noautoresize="false" id="content-wrapper-area"> <div class=" perc-vertical "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="page-title-wrapper"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+        
+<div>  
+
+<h1>DEPARTMENT OF COMPUTER SCIENCE</h1> 
+</div>
+    
+    
+</div>
+</div></div><div  class="perc-region perc-fixed perc-vertical "  data-noautoresize="false" id="body-content-wrapper"> <div class=" perc-vertical "><div  class="perc-region perc-fixed perc-horizontal ui-helper-clearfix "  data-noautoresize="false" id="content-row-1"> <div class=" perc-horizontal ui-helper-clearfix "><div  class="perc-region perc-fixed perc-vertical left-column side-navigation "  data-noautoresize="false" id="content-row-1-col-1"> <div class=" perc-vertical "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="sidebar-menu"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+<button class="expand">Expand Menu<i class="fa fa-angle-down" style="float:right;font-size: 1.2rem;"></i></button>
+
+</div>
+        <div class="perc-widget" >
+
+        <div role="navigation" aria-label="Secondary Navigation" class="expand-content  perc-navbar">
+<ul role="menubar" class="perc-navbar-vertical">
+<li role="presentation" class="nav-level-3 nav-entry-1 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-1-list-position-1-113428783" href="/csc/programs/" role="menuitem">Programs</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-3-nav-entry-1-list-position-1-113428783">
+<li role="presentation" class="nav-level-4 nav-entry-1 list-position-1 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-1-list-position-1-113428783" href="/csc/programs/computer-science-programs/" role="menuitem">Computer Science Programs</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-4-nav-entry-1-list-position-1-113428783">
+<li role="presentation" class="nav-level-5 nav-entry-1 list-position-1 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-1-list-position-1-113428783" href="/csc/programs/computer-science-programs/bs-computer-science/" role="menuitem">BS In Computer Science</a></li>
+<li role="presentation" class="nav-level-5 nav-entry-2 list-position-2 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-2-list-position-2-113428783" href="/csc/programs/computer-science-programs/ms-computer-science/" role="menuitem">MS in Computer Science</a></li>
+<li role="presentation" class="nav-level-5 nav-entry-3 list-position-3 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-3-list-position-3-113428783" href="/csc/programs/computer-science-programs/minor-in-computer-science/" role="menuitem">Minor in Computer Science</a></li>
+<li role="presentation" class="nav-level-5 nav-entry-4 list-position-4 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-4-list-position-4-113428783" href="/csc/programs/computer-science-programs/certificate-in-computer-science/" role="menuitem">Certificate in Computer Science</a></li>
+</ul></li><li role="presentation" class="nav-level-4 nav-entry-2 list-position-2 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-2-list-position-2-113428783" href="/csc/programs/it-programs/" role="menuitem">Information Technology Programs</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-4-nav-entry-2-list-position-2-113428783">
+<li role="presentation" class="nav-level-5 nav-entry-5 list-position-1 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-5-list-position-1-113428783" href="/csc/programs/it-programs/bs-information-technology/" role="menuitem">BS in Information Technology</a></li>
+</ul></li><li role="presentation" class="nav-level-4 nav-entry-3 list-position-3 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-3-list-position-3-113428783" href="/csc/programs/computer-tech-programs/" role="menuitem">Computer Technology Programs</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-4-nav-entry-3-list-position-3-113428783">
+<li role="presentation" class="nav-level-5 nav-entry-6 list-position-1 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-6-list-position-1-113428783" href="/csc/programs/computer-tech-programs/ba-computer-tech/" role="menuitem">BA in Computer Technology</a></li>
+<li role="presentation" class="nav-level-5 nav-entry-7 list-position-2 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-7-list-position-2-113428783" href="/csc/programs/computer-tech-programs/minor-in-computer-tech/" role="menuitem">Minor in Computer Technology</a></li>
+<li role="presentation" class="nav-level-5 nav-entry-8 list-position-3 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-8-list-position-3-113428783" href="/csc/programs/computer-tech-programs/certificate-in-computer-tech/" role="menuitem">Certificate in Computer Technology</a></li>
+</ul></li><li role="presentation" class="nav-level-4 nav-entry-4 list-position-4 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-4-list-position-4-113428783" href="/csc/programs/cyber-security-programs/" role="menuitem">Cyber Security Programs</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-4-nav-entry-4-list-position-4-113428783">
+<li role="presentation" class="nav-level-5 nav-entry-9 list-position-1 "><a id="perc-navigation-menuitem-nav-level-5-nav-entry-9-list-position-1-113428783" href="/csc/programs/cyber-security-programs/ms-cyber-security/" role="menuitem">MS in Cyber Security</a></li>
+</ul></li><li role="presentation" class="nav-level-4 nav-entry-5 list-position-5 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-5-list-position-5-113428783" href="/csc/programs/syllabi/" role="menuitem">Syllabi</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-6 list-position-6 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-6-list-position-6-113428783" href="/csc/programs/cs-advisory-council/" role="menuitem">Computer Science Advisory Council</a></li>
+</ul></li><li role="presentation" class="nav-level-3 nav-entry-2 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-2-list-position-1-113428783" href="/csc/faculty-staff/" role="menuitem">Faculty/Staff</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-3 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-3-list-position-1-113428783" href="/csc/students/" role="menuitem">Students</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-3-nav-entry-3-list-position-1-113428783">
+<li role="presentation" class="nav-level-4 nav-entry-7 list-position-1 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-7-list-position-1-113428783" href="/csc/students/current-students/" role="menuitem">Current Students</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-8 list-position-2 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-8-list-position-2-113428783" href="/csc/students/prospective-students/" role="menuitem">Prospective Students</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-9 list-position-3 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-9-list-position-3-113428783" href="/csc/students/international-students/" role="menuitem">International Students</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-10 list-position-4 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-10-list-position-4-113428783" href="/csc/students/internship-scholarship/" role="menuitem">Internship/Scholarship</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-11 list-position-5 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-11-list-position-5-113428783" href="/csc/students/alumni/" role="menuitem">Alumni</a></li>
+</ul></li><li role="presentation" class="nav-level-3 nav-entry-4 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-4-list-position-1-113428783" href="/csc/partners/" role="menuitem">Partners</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-3-nav-entry-4-list-position-1-113428783">
+<li role="presentation" class="nav-level-4 nav-entry-12 list-position-1 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-12-list-position-1-113428783" href="/csc/partners/cahsi/" role="menuitem">CAHSI</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-13 list-position-2 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-13-list-position-2-113428783" href="/csc/partners/great-minds-in-stem/" role="menuitem">Great Minds in Stem</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-14 list-position-3 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-14-list-position-3-113428783" href="/csc/partners/csudh-gear-up/" role="menuitem">CSUDH Gear-up Program</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-15 list-position-4 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-15-list-position-4-113428783" href="/cspromise/" role="menuitem">CS Promise Cohort</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-16 list-position-5 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-16-list-position-5-113428783" href="/csc/partners/ncwit/" role="menuitem">NCWIT</a></li>
+<li role="presentation" class="nav-level-4 nav-entry-17 list-position-6 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-17-list-position-6-113428783" href="/cssa/" role="menuitem">Computer Science Supplementary Authorization</a></li>
+</ul></li><li role="presentation" class="nav-level-3 nav-entry-5 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-5-list-position-1-113428783" href="/csc/resources/" role="menuitem">Resources</a><ul role="menu" aria-labelledby="perc-navigation-menuitem-nav-level-3-nav-entry-5-list-position-1-113428783">
+<li role="presentation" class="nav-level-4 nav-entry-18 list-position-1 "><a id="perc-navigation-menuitem-nav-level-4-nav-entry-18-list-position-1-113428783" href="/csc/resources/brochures-prerequisites/" role="menuitem">Brochures &amp; Prerequisites</a></li>
+</ul></li><li role="presentation" class="nav-level-3 nav-entry-6 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-6-list-position-1-113428783" href="/csc/news/" role="menuitem">News</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-7 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-7-list-position-1-113428783" href="/csc/about/" role="menuitem">About</a></li>
+<li role="presentation" class="nav-level-3 nav-entry-8 list-position-1 "><a id="perc-navigation-menuitem-nav-level-3-nav-entry-8-list-position-1-113428783" href="/csc/contact/" role="menuitem">Contact</a></li>
+</ul>
+<div style="clear:both"></div>
+</div>
+    
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="sidebar-latest-news"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+     
+            <!-- News Block -->
+       <div class=" csudhNews">
+       <style>
+           .csudh-news-list{
+           		list-style-type: none;
+    			margin: 0;
+    			padding: 0;
+    			float: left;
+			    padding-left: 5px;
+			    width: 100%;
+			    padding-top: 1em;
+			    padding-bottom: 1em;
+			    box-sizing: border-box;
+			    text-transform: capitalize !important;
+				display: inline-block;
+    		}
+    		.csudh-news-description{
+    			display: inline-block;
+  				overflow: hidden;
+  				width: 100%;
+    		}
+    		.csudh-news-link{
+    			 padding-bottom: 4em;
+    		}
+    		.csudh-news-header{
+    			display:none;
+    		}
+       </style>
+       <script>
+       jQuery( document ).ready(function() {
+       var FEED_URL="https://news.csudh.edu/feed/?cat=2069,2068";
+
+        var jqXHR = jQuery.get(FEED_URL, function (data) {
+    	var count=0;
+        
+    jQuery(data).find("item").each(function () {
+        var el = jQuery(this);
+        var link = "<a class='csudh-news-link' href='" + el.find("link").text() + "' target='_blank' >" + el.find("title").text() + "</a>";
+        var moreLink = "<a class='csudh-news-link' href='" + el.find("link").text() + "' target='_blank' >...</a>";
+        var cleanDesc = el.find("description").text();
+        cleanDesc = cleanDesc.replace("[&#8230;]", moreLink); 
+        var desc = "<span class='csudh-news-description'>" + cleanDesc + "</span>";
+ 		 		desc = "";
+ 		 	    var list = jQuery('ul[class="csudh-news-list"]');
+ 	    if(list.children().length < 3){
+ 	    	list.append("<li class='csudh-news-list-item'>" + link + "<br/><br/>" + desc + "</li>");
+ 	    	count++;
+ 	    }else{
+ 	    	jQuery(".csudh-news-header").show();
+ 	    	return false; //drop out of each as we have hit our news max.
+ 	    }
+    });
+    if(count == 0){
+     jQuery(".csudh-news-header").hide();
+    }
+    
+}).fail(function(){
+    jQuery(".csudh-news-header").hide();
+});
+});
+       </script>
+       <div class="sidebar-heading">
+                          <p class="csudh-news-header">Latest News</p>
+             <ul class="csudh-news-list">
+             </ul>
+                    </div>
+       </div>
+    
+    
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="sidebar-events"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+
+<div class=" perc-ems-eventlist-container" data-query="{&quot;eventName&quot;:&quot;&quot;,&quot;location&quot;:&quot;&quot;,&quot;calendars&quot;:[],&quot;eventTypes&quot;:[],&quot;startDate&quot;:&quot;2021-06-26 12:51:10&quot;,&quot;endDate&quot;:&quot;2021-09-24 12:51:10&quot;}" data-options="{&quot;eventListTitleTag&quot;:&quot;h3&quot;,&quot;showDescription&quot;: false,&quot;showLocation&quot;: false,&quot;showPastEvents&quot;:&quot;none&quot;,&quot;showFutureEvents&quot;: &quot;three_month&quot;,&quot;maxEvents&quot;:4,&quot;showEventDate&quot;:true,&quot;showEventTime&quot;:false,&quot;eventDateLocale&quot;: &quot;en&quot;,&quot;enableCalenderIcon&quot;:false,&quot;listTitle&quot;: &quot;Events&quot;,&quot;hideEventListOverride&quot;:&quot;false&quot;, &quot;eventListLimitOverride&quot;:4,&quot;baseEmsEventLink&quot;:&quot;http://ems.csudh.edu/MasterCalendar/EventDetails.aspx?EventDetailId=&quot;, &quot;publish&quot;:true}">
+
+<div style="display:none" role="presentation" class="perc-emseventlist-structure perc-emsevent-list">
+</div>
+</div>
+
+  
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="sidebar-extra-1"> <div class=" perc-vertical "></div></div></div></div><div  class="perc-region perc-fixed perc-vertical right-column "  data-noautoresize="false" id="content-row-1-col-2"> <div class=" perc-vertical "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="content-right-1"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+        
+        
+    
+</div>
+        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><div class="wrapper"><div class="main"><br/> <!-- youtube --> <!-- 
+<p align="center"><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/p-xMpheR4to?rel=0&amp;modestbranding=1&amp;autohide=1&amp;showinfo=0&amp;controls=0" width="560">Alternate iframe text</iframe></p> --> <!-- youtube ends --> <!-- Slider code--> <ul class="rslides"><li><img alt="CSUDH LOGO" height="250" src="/Assets/csudh-sites/csc/images/CSUDH_BANNER.png" title="CSUDH_Title_Banner" width="990"/></li><li><img alt="CSPROMISE GOOGLE EVENT" height="252" src="/Assets/csudh-sites/cspromise/images/slideshow/Slider_Image_4.jpg" title="Slider_Image_4" width="1000"/></li><li><img alt="CSPROMISE GOOGLE EVENT" height="250" src="/Assets/csudh-sites/cspromise/images/slideshow/Slider_Image_2.jpg" title="Slider_Image_2" width="990"/></li><li><img alt="CSPROMISE GOOGLE EVENT" height="250" src="/Assets/csudh-sites/cspromise/images/slideshow/Slider_Image_3.jpg" title="Slider_Image_3" width="990"/></li></ul><!-- Slider Code ends --><div><h2><strong>WELCOME TO DEPARTMENT OF COMPUTER SCIENCE</strong></h2><p>The Computer Science department strives for excellence in the discipline and profession. We strive to provide the best quality of education to our students at all levels.</p><p>Computer Science department prepares students for a successful professional career into advanced studies or the professional industry. We are committed on providing the resources students of all backgrounds need to succeed and thrive in the field. With the skills learned though our programs, our students are fully equipped to help solve today’s problems. Additionally, we support our faculty efforts to expand the body of knowledge by disseminating their findings in publications, our faculty are involved in the curriculum development and pedagogical innovations.</p></div></div><div class="sidebar"><table><tbody><tr><td id="home_cell"><a href="/csc/" style="color: #fff; text-decoration: none;" title="DEPARTMENT OF COMPUTER SCIENCE">QUICK LINKS</a></td></tr><tr><td><a href="/csc/" title="DEPARTMENT OF COMPUTER SCIENCE">CSC Main Page</a></td></tr><tr><td><a data-jcrpath="/Sites/www.csudh.edu/csc/students/advisng" data-pathitem="{&quot;id&quot;:&quot;16777215-101-157466&quot;,&quot;name&quot;:&quot;advisng&quot;,&quot;folderPaths&quot;:[&quot;//Sites/www.csudh.edu/csc/students&quot;],&quot;icon&quot;:&quot;/Rhythmyx/sys_resources/images/finderPage.png&quot;,&quot;category&quot;:&quot;PAGE&quot;,&quot;revisionable&quot;:true,&quot;type&quot;:&quot;percPage&quot;,&quot;leaf&quot;:true,&quot;hasItemChildren&quot;:false,&quot;hasFolderChildren&quot;:false,&quot;hasSectionChildren&quot;:false,&quot;mobilePreviewEnabled&quot;:true,&quot;path&quot;:&quot;/Sites/www.csudh.edu/csc/students/advisng&quot;,&quot;accessLevel&quot;:&quot;WRITE&quot;,&quot;typeProperties&quot;:{&quot;entries&quot;:{}},&quot;folderPath&quot;:&quot;//Sites/www.csudh.edu/csc/students/advisng&quot;,&quot;columnData&quot;:{}}" href="/csc/students/advising" title="Advising">Student Advising</a></td></tr><tr><td><a href="/csc/news/" title="News">Latest News</a></td></tr><tr><td><a href="/csc/students/internship-scholarship/" rel="noopener noreferrer" target="_blank" title="Internship/Scholarship">Internship/Scholarships</a></td></tr><tr><td><a href="/csc/news/" title="News">LSAMP Tutoring</a></td></tr><tr><td><a href="/csc/contact/" title="Contact Us">Accessing Support during COVID-19</a></td></tr></tbody></table></div></div></div></div>
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="accordion-section-wrapper"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+    
+       
+       <div class="csudhAccordionSection">
+               </div>
+    
+    
+</div>
+        <div class="perc-widget" >
+
+    
+       
+       <div class="csudhAccordionSection">
+                    <div class="accTitle">Quick Links</div>
+<div class="accContent"><div class="rxbodyfield"><ul><li><h3>Brochures</h3><ul><li><a href="/Assets/csudh-sites/csc/docs/BSCS-Brochure.pdf" rel="noopener noreferrer" target="_blank" title="BSCS-Brochure">Bachelor of Science Computer Science</a></li><li><a href="/Assets/csudh-sites/csc/docs/MSCS-Brochure.pdf" rel="noopener noreferrer" target="_blank" title="MSCS-Brochure">Master of Science Computer Science</a></li><li><a href="/Assets/csudh-sites/csc/docs/BSIT-Brochure.pdf" rel="noopener noreferrer" target="_blank" title="BSIT-Brochure">Bachelor of Science Information Technology</a></li><li><a href="/Assets/csudh-sites/csc/docs/BACT-Brochure.pdf" rel="noopener noreferrer" target="_blank" title="BACT-Brochure">Bachelor of Art Computer Technology</a></li><li><a href="#" rel="noopener noreferrer" target="_blank" title="MSCY-Brochure">Master of Science Cyber Security</a></li></ul></li><li><h3>Prerequisites</h3><ul><li><a href="/Assets/csudh-sites/csc/docs/prerequisites/BSCS_MAY_2020.pdf" rel="noopener noreferrer" target="_blank" title="BSCS_MAY_2020">Bachelor of Science Computer Science</a></li><li><a href="#" rel="noopener noreferrer" target="_blank" title="BACT_prerequisite"><span>Bachelor of Art Computer Technology</span></a></li><li><a href="/Assets/csudh-sites/csc/docs/prerequisites/BSIT_MAY_2020.pdf" rel="noopener noreferrer" target="_blank" title="BSIT_MAY_2020">Bachelor of Science Information Technology</a></li></ul></li></ul></div></div>
+               </div>
+    
+    
+</div>
+        <div class="perc-widget" >
+
+    
+       
+       <div class="csudhAccordionSection">
+               </div>
+    
+    
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical programs-individual "  data-noautoresize="false" id="content-right-2"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+    
+       
+       <div class="csudhAccordionSection">
+               </div>
+    
+    
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="content-body"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-1"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-2"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-3"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-4"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-5"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-6"> <div class=" perc-vertical "></div></div><div  class="perc-region perc-region-leaf perc-vertical "  data-noautoresize="undefined" id="temp-region-7"> <div class=" perc-vertical "></div></div></div></div></div></div></div></div></div></div><div  class="perc-region perc-vertical vspan_2 "  data-noautoresize="false" id="footer"> <div class=" perc-vertical "><div  class="perc-region perc-fixed perc-horizontal ui-helper-clearfix "  data-noautoresize="false" id="footer-top"> <div class=" perc-horizontal ui-helper-clearfix "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="footer-top-left"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><p class=""><a href="https://www.csudh.edu" title="Campus home page">California State University, Dominguez Hills</a></p></div></div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="footer-top-right"> <div class=" perc-vertical ">        <div class="perc-widget" >
+
+<ul> 
+ <li><a href="https://www.facebook.com/csudh/" title="Facebook"><i class="fa fa-facebook" title="Follow CSUDH on Facebook"></i></a> </li> 
+ <li><a href="http://twitter.com/dominguezhills" title="Twitter"><i class="fa fa-twitter" title="Follow CSUDH on Twitter"></i></a> </li> 
+ <li><a href="http://instagram.com/csudominguezhills?ref=badge" title="Follow CSUDH on Instagram"><i class="fa fa-instagram" title="Instagram"></i></a></li> 
+ <li><a href="https://www.linkedin.com/school/csudh" title="Follow CSUDH on LinkedIn"><i class="fa fa-linkedin" title="LinkedIn"></i></a></li> 
+ <li><a href="http://www.youtube.com/csudhtv" title="Follow CSUDH on YouTube"><i class="fa fa-youtube-play" title="YouTube"></i></a></li> 
+</ul>
+
+</div>
+</div></div></div></div><div  class="perc-region perc-fixed perc-horizontal ui-helper-clearfix "  data-noautoresize="false" id="footer-bottom"> <div class=" perc-horizontal ui-helper-clearfix "><div  class="perc-region perc-region-leaf perc-fixed perc-vertical four-col "  data-noautoresize="false" id="footer-bottom-col-1"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><p>1000 E. Victoria Street<br/>Carson, CA 90747<br/>310-243-3696</p><p class=""><a href="/visit-us/campus-map-directions/" title="Campus Map &amp; Directions">Map</a></p><p class=""><a href="/about/contact-us/" title="Contact Us Page">Contact Us</a></p><p class=""><a href="/privacy/" title="Privacy">Privacy Policy</a></p><p class=""><a href="/procurement/facilities-lease/" title="Facilities Leasing &amp; Scheduling">Facilities and Leasing</a></p><p class=""><a href="https://news.csudh.edu/" rel="noopener noreferrer" target="_blank" title="Media Resources">Media Resources</a></p></div></div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical four-col "  data-noautoresize="false" id="footer-bottom-col-2"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><ul><li class=""><a href="/a-z-index/" title="A-Z Site Index">A-Z Site Index</a></li><li class=""><a href="https://csudh.service-now.com/" rel="noopener noreferrer" target="_blank" title="File a Ticket">User Services (Help Desk)</a></li><li class=""><a href="http://www5.csudh.edu/asp/report508form.asp" rel="noopener noreferrer" target="_blank" title="Report Accessibility Issue">ADA Compliance</a></li><li class=""><a href="https://get.adobe.com/reader" rel="noopener noreferrer" target="_blank" title="Download Adobe Acrobat Reader">Get Adobe Reader</a></li><li class=""><a href="/access/" title="Campus Accessibility Statement">Accessibility</a></li></ul></div></div>
+</div>
+</div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical four-col "  data-noautoresize="false" id="footer-bottom-col-3"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><ul><li class=""><a href="/dhpd/" title="University Police">DH Police</a></li><li class=""><a href="/alert" title="Alert">Emergency Information</a></li><li class=""><a href="/Assets/csudh-sites/dhpd/docs/2020_Annual%20Security%20Report.pdf" title="2020_Annual Security Report">Annual Security Report [PDF]</a></li><li class=""><a href="/equity/" title="Gender Equity &amp; Inclusion">Title IX</a></li><li class=""><a href="https://www2.calstate.edu/" rel="noopener noreferrer" target="_blank" title="California State University">CSU</a></li><li class=""><a href="/hr/career-opportunities/" title="Career Opportunities at CSUDH">Careers at CSUDH</a></li></ul></div></div>
+</div>
+</div></div><div style="width:180px;" class="perc-region perc-region-leaf perc-fixed perc-vertical four-col "  data-noautoresize="false" id="footer-bottom-col-4"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+</div>
+</div>
+</div></div></div></div><div  class="perc-region perc-region-leaf perc-fixed perc-vertical "  data-noautoresize="false" id="footer-copyright"> <div class=" perc-vertical ">        <div class="perc-widget" >
+<div>
+
+<div class="rxbodyfield"><p style="text-align: right;">© 2021 California State University, Dominguez Hills</p></div></div>
+</div>
+</div></div></div></div></div></div>
+
+
+<script>
+var acc = document.getElementsByClassName("expand");
+var i;
+var content = document.getElementsByClassName('expand-content')[0];
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";        }
+    });
+}
+function displayMenu(x) {
+    if (x.matches) { 
+        content.style.display = "block";
+    } else {         content.style.display = "none";    }
+}
+
+var x = window.matchMedia("(min-width: 1040px)")
+displayMenu(x)
+x.addListener(displayMenu)
+</script>
+
+<style>
+  .csudh-news-header {
+   display: block!important;
+}
+</style>
+
+
+<script src="/web_resources/themes/CSUDH-2017/csudh-main-init.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-12806988-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-12806988-6');
+</script>
+
+<script src="/web_resources/cm/jslib/jquery-ui.1.12.1.js"></script>
+<script>(function() { jQuery.getDeliveryServiceBase = function(){ return 'https://csudh-dts.percussion.marketing';};jQuery.getCm1License = function(){ return 'deprecated-opensource';};jQuery.getCm1Version = function(){ return '8.0.2';};})();</script>
+<script src="/web_resources/widgets/image/lightbox/lightbox.js"></script>
+<script src="/web_resources/cm/common/js/PercGlobalVariables.js"></script>
+<script src="/web_resources/widgets/navBar/js/hoverIntent.min.js"></script>
+<script src="/web_resources/cm/jslib/jquery.cookie.min.js"></script>
+<script src="/web_resources/widgets/navBar/js/superfish.min.js"></script>
+<script src="/web_resources/widgets/navBar/js/supersubs.min.js"></script>
+<script src="/web_resources/cm/common/js/perc_common_ui_slim.js"></script>
+<script src="/web_resources/widgets/emsEventList/js/PercEmsEventListService.js"></script>
+<script src="/web_resources/widgets/navBar/js/navbar.min.js"></script>
+<script src="/web_resources/widgets/emsEventList/js/PercEmsEventListView.js"></script>
+</body>
+</html>

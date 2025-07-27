@@ -1,0 +1,15 @@
+A:link {background:#ffffaa;color:blue}
+A:hover {background:white;color:red}
+A:active {background:white;color:red}
+A:visited {background:#ffffaa;color:purple}
+HR {color:#ccaacc}
+
+pre {
+  background: #d5edf8;
+  color: #205791;
+  padding:0.5em;
+  margin:0;
+  border: 2 px solid #ddd;
+  border-color: #92cae4;
+}
+

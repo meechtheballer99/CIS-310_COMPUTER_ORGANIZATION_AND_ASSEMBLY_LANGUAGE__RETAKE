@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://s0.2mdn.net/5263622/1621020937312/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <title>PNC LCM</title> <meta name="description" content=""> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta name="ad.size" content="width=300,height=250"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <link rel="stylesheet" href="./main.css"> <script>var clickTag=""</script> <script type="text/javascript">
+    
+  (function() {
+    var MAX_URL_PARAM_LENGTH = 34;
+    var CLICK_X_URL_KEY = 'nx';
+    var CLICK_Y_URL_KEY = 'ny';
+    var CREATIVE_DIMENSIONS_KEY = 'dim';
+    var AD_URL_PARAM = '&adurl=';
+
+    var relegateNavigation = '';
+    var urlParamMap = {};
+
+    urlParamMap[CLICK_X_URL_KEY] = null;
+    urlParamMap[CLICK_Y_URL_KEY] = null;
+    urlParamMap[CREATIVE_DIMENSIONS_KEY] = null;
+
+    var handleClickTagMessage = function(e) {
+      try {
+        var eventData = JSON.parse(e.data);
+      } catch (err) {
+        return;
+      }
+      if (eventData.isInitClickTag) {
+        if (eventData.clickTags) {
+          for (var i = 0; i < eventData.clickTags.length; i++) {
+            var clkTag = eventData.clickTags[i];
+            window[clkTag.name] = clkTag.url;
+          }
+        } else if (eventData.clickTag) {
+          window.clickTag = eventData.clickTag;
+        }
+        relegateNavigation = eventData.relegateNavigation;
+      }
+    };
+
+    var storeClickCoordinates = function(e) {
+      urlParamMap[CLICK_X_URL_KEY] = Math.round(e.clientX);
+      urlParamMap[CLICK_Y_URL_KEY] = Math.round(e.clientY);
+    };
+
+    var getCreativeDimensions = function() {
+      return window.innerWidth + 'x' + window.innerHeight;
+    }
+
+    var getExitClickParams = function(e) {
+      urlParamMap[CREATIVE_DIMENSIONS_KEY] = getCreativeDimensions();
+
+      var exitParams = '';
+      for (var key in urlParamMap) {
+        exitParams += '&' + key + '=';
+        if (urlParamMap[key] !== null) {
+          exitParams += urlParamMap[key];
+        }
+      }
+      return exitParams;
+    }
+
+    var appendExitClickParams = function(url) {
+      var adUrlIndex = url.toLowerCase().indexOf(AD_URL_PARAM);
+      var paramsToBeAdded = getExitClickParams();
+      if (adUrlIndex > -1 && paramsToBeAdded.length <= MAX_URL_PARAM_LENGTH) {
+        url = url.substr(0, adUrlIndex) + paramsToBeAdded +
+          url.substr(adUrlIndex);
+      };
+      return url;
+    };
+
+    if (open.call) {
+      window.open = function(open) {
+        return function(url, name, features) {
+          url = appendExitClickParams(url);
+          if (relegateNavigation === 'parent') {
+            var message = {'clickTag': url, 'isPostClickTag': true};
+            parent.postMessage(JSON.stringify(message), '*');
+          } else {
+            var args = [url, name];
+            if (features) {
+              args.push(features);
+            }
+            open.apply(window, args);
+          }
+        };
+      }(window.open);
+    }
+
+    if (window.addEventListener) {
+      window.addEventListener(
+          'message', handleClickTagMessage, false);
+      window.addEventListener('mousedown', storeClickCoordinates, true);
+    } else {
+      window.attachEvent('onmessage', handleClickTagMessage);
+    }
+  })();
+    
+  </script></head> <body> <div id="banner" style="opacity: 1;"> <div id="orange"></div> <div id="blue" class="icon-blue" style="transform: translate3d(-215px, 0px, 0.1px);"></div> <div id="shadow" class="icon-shadow"></div> <div id="copy1" class="icon-copy1 hide" style="opacity: 0; transform: translate3d(0px, 0px, 0.1px);"></div> <div id="copy2" class="icon-copy2 hide" style="opacity: 0; transform: translate3d(0px, 0px, 0.1px);"></div> <div id="copy3" class="icon-copy3 hide" style="opacity: 1; transform: translate3d(170px, 0px, 0.1px);"></div> <div id="copy4" class="icon-copy4 hide" style="opacity: 1; transform: translate3d(170px, 0px, 0.1px);"></div> <div id="copy5" class="icon-copy5 hide" style="opacity: 1; transform: translate3d(170px, 0px, 0.1px);"></div> <div id="line" class="icon-line hide" style="transform-origin: 15px 67px 0px; transform: translate3d(0px, 0px, 0.1px); opacity: 1;"></div> <div id="phone1" class="icon-phone1" style="transform: translate3d(0px, -170px, 0.1px); opacity: 0;"></div> <div id="phone2" class="icon-phone2" style="transform: translate3d(-145px, 100px, 0.1px);"></div> <div id="marks" class="icon-marks hide" style="opacity: 0; transform: translate3d(-2px, 0px, 0.1px);"></div> <div id="logo" class="icon-logo" style="transform: translate3d(0px, -20px, 0.1px);"></div> <div id="cta" class="icon-cta"></div> <div id="carat" class="icon-carat" style="transform: translate3d(1.19347px, 0px, 0.1px);"></div> <div id="legal" class="icon-legal hide" style="opacity: 1; transform: translate3d(0px, 0px, 0.1px);"></div> <div id="rolloverWrap" class="hide" style="opacity: 1;"> <div id="details" class="icon-details"></div> </div> <div id="detailstab" class="icon-details hide" style="opacity: 1;"></div> <div id="detailsBtnHit" class="hide" style="display: block;"></div> <div id="border"></div> <div id="button-exit"></div> </div> <!-- <script src="https://s0.2mdn.net/ads/studio/cached_libs/cssplugin_1.18.0_71489205621d46cbe88348eeb8fe493f_min.js"></script> --> <!-- <script src="https://s0.2mdn.net/ads/studio/cached_libs/easepack_1.18.0_ed5816e732515f56d96a67f6a2a15ccb_min.js"></script> --> <!-- <script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenlite_1.18.0_56fa823cfbbef1c2f4d4346f0f0e6c3c_min.js"></script> --> <!--  --> <script src="./tweenmax_1.19.0_643d6911392a3398cb1607993edabfa7_min.js.download"></script> <script src="./main.js.download"></script> </body></html>

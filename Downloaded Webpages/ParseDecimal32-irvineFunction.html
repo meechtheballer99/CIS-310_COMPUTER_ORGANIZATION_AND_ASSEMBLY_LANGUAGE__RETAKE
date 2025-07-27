@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0077)http://csc.csudh.edu/mmccullough/asm/help/source/irvinelib/parsedecimal32.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="online documentation, web online help, web help, chm2web">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+
+<meta name="generator" content="chm2web Pro 2.85 (unicode)">
+<title>ParseDecimal32</title>
+<meta name="FILE" contents="\IrvineLibHelp\IrvineLib\WriteInt.htm">
+<meta name="GENERATOR" content="Microsoft® HTML Help Workshop 4.1">
+<link rel="stylesheet" href="./ParseDecimal32-irvineFunction_files/helpindex.css" type="text/css">
+<link rel="stylesheet" href="./ParseDecimal32-irvineFunction_files/default.css" type="text/css">
+
+<script type="text/JavaScript" src="./ParseDecimal32-irvineFunction_files/supply.js.download"></script>
+<script type="text/JavaScript">
+chmtop.c2wtopf.pageid = "irvinelib/parsedecimal32.htm";
+</script>
+
+</head>
+<body><script type="text/JavaScript"> 
+if (window.name != "content") 
+  document.write(" <table width=\"100%\" bgcolor=\"#e1e1e1\"cellspacing=\"2\" cellpadding=\"0\" style=\"border-collapse: collapse; font-family: sans-serif; font-size: 14px; color: #000000; text-decoration: none;  \"> <tr> <td align=\"center\" style=\"border-bottom: 2px solid gray\" > <br>&nbsp;Click <a href=\"../../index.html?page=source%2Firvinelib%2Fparsedecimal32.htm\">here</a> to show toolbars of the Web Online Help System: <a href=\"../../index.html?page=source%2Firvinelib%2Fparsedecimal32.htm\">show toolbars</a><br>&nbsp;</td></tr></table><br> "); 
+</script> <table width="100%" bgcolor="#e1e1e1" cellspacing="2" cellpadding="0" style="border-collapse: collapse; font-family: sans-serif; font-size: 14px; color: #000000; text-decoration: none;  "> <tbody><tr> <td align="center" style="border-bottom: 2px solid gray"> <br>&nbsp;Click <a href="http://csc.csudh.edu/mmccullough/asm/help/index.html?page=source%2Firvinelib%2Fparsedecimal32.htm">here</a> to show toolbars of the Web Online Help System: <a href="http://csc.csudh.edu/mmccullough/asm/help/index.html?page=source%2Firvinelib%2Fparsedecimal32.htm">show toolbars</a><br>&nbsp;</td></tr></tbody></table><br> 
+<!-- !chm2web! -->
+
+<p align="left"><tt><big><b>ParseDecimal32 PROC</b></big></tt><br>
+<br>
+&nbsp;&nbsp;&nbsp;Converts an unsigned decimal integer string into
+32-bit binary..</p>
+
+<pre><b>Call args:</b>  EDX = offset of decimal string
+            ECX = length of decimal string
+
+<b>Return arg:</b> EAX = binary value
+                 (See the ReadDec procedure for information about how
+                  the Carry flag is affected.)
+
+<b>Example:</b>
+
+.data
+buffer BYTE "8193"
+bufsize = ($ - buffer)
+decval DWORD ?
+
+.code
+    mov   edx,OFFSET buffer
+    mov   ecx,bufsize
+    call  ParseDecimal32
+    mov   decval,EAX
+</pre>
+
+<script type="text/JavaScript">
+var fe = FindFrame("toc", top);
+if ((fe != null) && (chmtop.c2wtopf.jstree != null)) {
+  if (chmtop.c2wtopf.FITEMS[chmtop.c2wtopf.pagenum] != chmtop.c2wtopf.pageid)
+    chmtop.c2wtopf.jstree.OpenTreeNode("source/" + chmtop.c2wtopf.pageid);
+}
+</script>
+
+<!-- CHM2WEB -->
+<!-- DO NOT DELETE OR MODIFY THIS CODE WITHOUT 
+     WRITTEN PERMISSION OF A!K RESEARCH LABS -->
+<table width="100%" cellspacing="0" cellpadding="0" style="margin-top: 0pt; border-collapse: collapse;"> 
+<tbody><tr> <td align="right" style="background-color:white; border-top: 1px solid gray;"> 
+<a href="http://chm2web.aklabs.com/" target="_blank" style="font-family: sans-serif;  font-size: 11px; text-decoration: none;"><font color="gray">Converted from CHM to HTML with <b>chm2web Pro 2.85 (unicode)</b></font></a>
+</td></tr></tbody></table> 
+<!-- /CHM2WEB -->
+
+
+
+</body></html>
